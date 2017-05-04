@@ -1,0 +1,15 @@
+					<div class="drink">
+						<div class="drink-left">
+							<h2><%= g.name -%></h2>
+							<h3><%= g.category.name -%> <span style="opacity: .5; margin: 0 10px;">//</span></h3>
+						</div>
+						<div class="drink-right">
+							<div class="drink-size">
+								<h2><%= g.players ||= 'N/A' -%></h2>
+								<h4>Players</h4>
+							</div>
+						</div>
+						<div class="promotions">
+							<%= raw('<span class="promo-new">just added</span>') if g.created_at < 5.days.ago %>
+						</div>
+					</div>

@@ -1,0 +1,40 @@
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<%= link_to 'Back to Dashboard', dashboard_home_path %>
+					<h1>Printables</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
+				<h3>Drink Menus</h3>
+				<ul class="list-nostyle list-nosidemargin">
+					<li><strong><%= link_to "Print Draft", prints_drafts_path %></strong></li>
+					<li><strong><%= link_to "Print Draft with Bottle Options", prints_drafts_path(:with_cans => true) %></strong></li>
+					<li><strong><%= link_to "Print Non Draft", prints_bottles_path %></strong></li>
+					<li><strong><%= link_to "Print Full Menu", prints_full_path %></strong></li>
+					<% @glass_size.each do |glass| %>
+						<li><strong><%= link_to "Print #{glass.name} Menu", prints_glass_path(glass) %></strong></li>
+					<% end %>
+				</ul>
+			</div>
+
+			<div class="col-6">
+				<h3>Game Menus</h3>
+				<ul class="list-nostyle list-nosidemargin">
+					<% @game_consoles.each do |console| %>
+						<li><strong><%= link_to "Print #{console.name} Menu", prints_game_path(console) %></strong></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	

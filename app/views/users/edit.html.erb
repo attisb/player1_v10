@@ -1,0 +1,41 @@
+<% @title = "Your Account" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1>Your Account</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			
+<%= render 'form' %>
+
+    <div class="btn-bar">
+      <%= submit_tag 'Update Information' %>
+    </div>
+
+
+<h4>Beers I've Had</h4>
+<% current_user.user_hads.each do |drink| %>
+	<%= link_to drink.drink.name, drinks_by_name_path(drink.drink) %> had on <%= drink.created_at.getlocal.strftime("%m/%d/%Y at %l:%M %p %Z") %><br/>
+<% end %>
+
+<h4>Beers I Want to Try</h4>
+<% current_user.user_wants.each do |drink| %>
+	<%= link_to drink.drink.name, drinks_by_name_path(drink.drink) %><br/>
+<% end %>
+		</div>
+		
+		<div class="col-4">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</div>
+</div>
+

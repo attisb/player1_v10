@@ -1,0 +1,35 @@
+<% @title = "Dashboard // Tap List" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Tap List</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="row">
+			<div class="col-8">
+				<h3>Current Tap List</h3>
+				<ul class="list-nostyle list-nosidemargin list-padlines">
+					<% @avail_drinks.each do |d| %>
+					<li>
+						<%= link_to d.drink.name, edit_dashboard_drink_path(d.drink.id, :tap_list => true) %>
+						<%= d.amount %>
+					</li>
+					<% end %>
+				</ul>
+			</div>
+			
+			<div class="col-4">
+				<h3>Find Drinks</h3>
+				<%= render 'dashboard/search/form', the_type: 'drinks' %>
+			</div>
+		</div>
+	</div>
+</div>

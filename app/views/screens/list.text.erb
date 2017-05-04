@@ -1,0 +1,15 @@
+<% if @screen.nil? -%>
+http://placehold.it/1920x1080/000/666?text=Screen+ID:+<%= params[:codeword] -%>
+<% else -%>
+<% if @screen_orders.count <= 1 -%>
+<% @screen_orders.order(order: :asc).each do |p| -%>
+<% if p.playlist.date_show < DateTime.now -%>
+<% p.playlist.playlist_orders.order(order: :asc).each do |a| -%>
+http://localhost:3000<%= a.asset.ad_asset_file.url %>
+<% end -%>
+<% end -%>
+<% end -%>
+<% else -%>
+http://localhost:3000<%= @default_graphic.ad_asset_file.url %>f
+<% end -%>
+<% end -%>

@@ -1,0 +1,52 @@
+<% @title = "Dashboard // Drinks" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Drinks</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-8">
+			<ul class="list-nostyle list-nosidemargin list-padlines list-addsplitlines">
+				<% if @drinks.empty? %>
+					<li><span class="alert-no-items">--- no items to show ---</span></li>
+				<% else %>
+					<% @drinks.each do |drink| %>
+						<%= render 'line_item', drink: drink %>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to 'Create a New Drink', new_dashboard_drink_path, :class => 'btn' %>
+			</div>
+
+			<h3>Find Drinks</h3>
+			<%= render 'dashboard/search/form', the_type: 'drinks' %>
+			
+			<h4>View Options</h4>
+			<ul class="list-nostyle list-padlines">
+				<li><%= link_to "View Last 30 Drinks", dashboard_drinks_path %></li>
+				<li class="list-letters">
+				<% ("a".."z").each do |letter| %>
+					<%= link_to "[#{letter.upcase}]", dashboard_drinks_path(:letter => letter) %>
+				<% end %>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+</div>
+
+
+

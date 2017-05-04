@@ -1,0 +1,32 @@
+<% @title = 'Events' %>
+
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<img src="/i/hero-events.jpg" />
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-7">
+				<h1>Upcoming Events</h1>
+				<ul class="list-nostyle list-padmargins">
+					<% if @events.empty? %>
+						<li><span class="alert-no-items">--- no upcoming events ---</span></li>
+					<% else %>
+						<% @events.each do |event| %>
+							<li>
+								<%= link_to event_path(event) do %><strong class="large"><%= event.title %></strong><% end %><br/>
+								<%= event.date.strftime("%A - %m/%d") %>
+								<%= simple_format event.description, :class => 'small' %>
+							</li>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+
+			<div class="col-5">
+				<h3>Have your party here</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+	</div>

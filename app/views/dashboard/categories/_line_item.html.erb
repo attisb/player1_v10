@@ -1,0 +1,7 @@
+<li class="large">
+	<a href="#"><strong><%= link_to category.name, [:dashboard, category] -%></strong> (<%= category.bucket_type.titleize -%>)</a>
+	<div class="btn-bar">
+		<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit'), edit_dashboard_category_path(category), :class => 'btn' %>
+		<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete'), dashboard_category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+	</div>
+</li>

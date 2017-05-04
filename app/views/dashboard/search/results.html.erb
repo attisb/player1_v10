@@ -1,0 +1,73 @@
+<% @title = "Dashboard // Search Results" %>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1>Search Results</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h3>Find</h3>
+				<%= render 'dashboard/search/form', the_type: 'choice' %>
+			</div>
+		</div>
+		<div class="row">
+			<% if !@breweries.nil? %>
+				<div class="col-12">
+					<h3>Breweries</h3>
+					<% if @breweries.empty? %>
+						<i class="large">No Results</i>
+					<% else %>
+					<ul class="list-nostyle list-nosidemargin list-padlines">
+						<% @breweries.each do |d| %>
+						<li>
+							<%= link_to d.name, edit_dashboard_brewery_path(d) %>
+						</li>
+						<% end %>
+					</ul>
+					<% end %>
+				</div>
+			<% end %>
+			
+			<% if !@drinks.nil? %>
+				<div class="col-12">
+					<h3>Drinks</h3>
+					<% if @drinks.empty? %>
+						<i class="large">No Results</i>
+					<% else %>
+					<ul class="list-nostyle list-nosidemargin list-padlines">
+						<% @drinks.each do |d| %>
+						<li>
+							<%= link_to d.name, edit_dashboard_drink_path(d) %>
+						</li>
+						<% end %>
+					</ul>
+					<% end %>
+				</div>
+			<% end %>
+
+
+			<% if !@games.nil? %>
+				<div class="col-12">
+					<h3>Games</h3>
+					<% if @games.empty? %>
+						<i class="large">No Results</i>
+					<% else %>
+					<ul class="list-nostyle list-nosidemargin list-padlines">
+						<% @games.each do |d| %>
+						<li>
+							<%= link_to d.name, edit_dashboard_game_path(d) %>
+						</li>
+						<% end %>
+					</ul>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>

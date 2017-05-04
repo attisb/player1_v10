@@ -1,0 +1,156 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* -------------------------------------------------------------------- */
+
+body {
+	background: #000;
+	color: #fff;
+	font-family: 'Lato', sans-serif;
+	overflow: hidden;
+}
+
+#preload {
+	display: none;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#slide-holder-images {
+	text-align: center;
+}
+
+#slide-holder-images img {
+    max-width: 100%;
+	vertical-align: middle;
+}
+
+.drink {
+	border-bottom: 1px solid #bbb;
+	box-sizing: border-box;
+	overflow: auto;
+	padding: 10px;
+	width: 100%;
+}
+.drink-left {
+	float: left;
+	width: 75%;
+}	
+.drink-right {
+	text-align: right;
+	float: right;
+	width: 25%;
+}
+.drink-size {
+	float: right;
+	width: 120px;
+	margin-left: 20px;
+	text-align: center;
+}
+.drink h2 {font-size: 30px; font-weight: bold; line-height: 30px;}
+.drink h3 {font-size: 20px; font-weight: bold; line-height: 30px;}
+.drink h4 {font-size: 16px; font-weight: bold; line-height: 30px;}
+.drink-left h2 {color: #5bd;}
+
+.promotions {
+	text-transform: uppercase;
+	font-weight: bold;
+	padding-top: 10px;
+	clear: left;
+}
+.promotions span {padding: 3px 11px; border-radius: 3px; background: #000; color: #fff; border: 1px solid rgba(0,0,0,.2); box-sizing: border-box; display: inline-block; margin-right: 10px;}
+.promo-na {background: #000 !important;}
+.promo-new {background: #FF003C !important;}
+.promo-back {background: #00C176 !important;}
+.promo-soon {background: #666 !important;}
+.promo-special {background: #FABE28 !important;}
+
+.beer-color {
+	border-radius: 30px;
+	color: #fff;
+	display: inline-block;
+	float: left;
+	font-size: 22px;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 10px;
+	text-align: center;
+	width: 30px;
+}
+.beer-color-level1 {background-color: #f3da73;}
+.beer-color-level2 {background-color: #d69333;}
+.beer-color-level3 {background-color: #9f430b;}
+.beer-color-level4 {background-color: #5f6063;}
+
+.rotate-div {
+    -webkit-transform: rotate(90deg) !important;
+    -webkit-transform-origin: left top !important;
+    transform: rotate(90deg) !important;
+    transform-origin: left top !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 100% !important;
+}
+
+i {
+	margin-top: 50px;
+	margin-left: 50px;
+}
+
+.header {
+	font-size: 60px !important;
+	font-weight: bold !important;
+	text-transform: uppercase !important;
+	padding: 20px 10px !important;
+}

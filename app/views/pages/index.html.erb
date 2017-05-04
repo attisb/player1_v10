@@ -1,0 +1,61 @@
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<img src="/i/hero-homepage.jpg" />
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-9">
+				<h1>Beers. Games. Music.</h1>
+				<p>
+					<strong>After four decades of Video Gaming; a few things are clear to us:</strong>
+					<ul>
+						<li>Arcade games must be played in their original format: joysticks, buttons, and a lo-rez tv screen in a big custom cabinet!</li>
+						<li>Playing online has its drawbacks, nothing beats playing against opponents sitting across the room.</li>
+						<li>Video Games deserve a place to celebrate the art and history of the #1 form of entertainment in the world.</li>
+						<li>We like Beer…ales to stouts and everything in between!</li>
+					</ul>
+				</p>
+				
+				<h3>Latest Beers</h3>
+				<ul class="list-nobullets list-nosidemargin list-largepad">
+				<% @drinks.each do |drink| %>
+					<%= render 'drinks/drink_front', drink: drink %>
+				<% end %>
+				</ul>
+
+				<h3>Upcoming Event</h3>
+				<ul class="list-nostyle list-padmargins">
+					<% @events.each do |event| %>
+						<li>
+							<%= link_to event_path(event) do %><strong class="large"><%= event.title %></strong><% end %><br/>
+							<%= event.date.strftime("%A - %m/%d") %>
+							<%= simple_format event.description, :class => 'small' %>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+			<div class="col-3">
+				<h3>Hours</h3>
+				<ul class="list-nostyle list-nosidemargin list-stats">
+					<li><strong>Sunday</strong>    <span>4pm - 2am</span></li>
+					<li><strong>Monday</strong>    <span>4pm - 2am</span></li>
+					<li><strong>Tuesday</strong>   <span>4pm - 2am</span></li>
+					<li><strong>Wednesday</strong> <span>4pm - 2am</span></li>
+					<li><strong>Thursday</strong>  <span>4pm - 2am</span></li>
+					<li><strong>Friday</strong>    <span>4pm - 2am</span></li>
+					<li><strong>Saturday</strong>  <span>4pm - 2am</span></li>
+				</ul>
+				
+				<p class="small">Under 21 allowed from open to 6pm with supervision from an adult. After 6pm <a href="#">Valid ID</a> <strong>required</strong> to enter.</p>
+				
+				<h3>Gamer Etiquette</h3>
+				<ul class="list-nobullets list-nosidemargin small">
+					<li>No aggressive or disruptive behavior will be tolerated whatsoever.</li>
+					<li>If playing an arcade game and someone else is waiting to play, finish your game and allow them a turn.</li>
+					<li>No abusive language. Smack talk is one thing, But don’t cross the line.</li>
+					<li>No Smoking. Drink Responsibly.</li>
+				</ul>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,28 @@
+<% @title = "Dashboard // Users" %>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+					<h1>Users Dashboard</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<% @users.each do |user| %>
+				<%= link_to user.email, edit_dashboard_user_path(user) %><br/>
+				<% end %>
+				
+			</div>
+			
+			<div class="col-4">
+				<h3>Find</h3>
+				<%= render 'dashboard/search/form', the_type: 'users' %>
+			</div>
+		</div>
+	</div>

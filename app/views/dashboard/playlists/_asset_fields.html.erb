@@ -1,0 +1,4 @@
+<fieldset>
+	<%= f.collection_select :asset_id, Asset.all, :id, :name %>
+	<%= f.text_field :order %>
+</fieldset>

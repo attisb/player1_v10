@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Ad Screen</title>
+	
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/i/menu_screen.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+	<script type="text/javascript">
+		<% if @screen.nil? %>
+			var slides = [
+				{"div": "noscreens"}
+			];
+		<% else %>
+			var slides = [
+				
+				
+				
+				
+<% @screen_orders.order(order: :asc).each do |p| -%>
+	<% if p.playlist.date_show < DateTime.now -%>
+		<% p.playlist.playlist_orders.order(order: :asc).each do |a| -%>
+			<% if a.asset.asset_type == 'm' %>
+				<% if a.asset.menu_type == 'd' %>
+					<% (1..@draft_pages).each do |i| %>
+						{"div": "draft_menu<%= i -%>"},
+					<% end %>
+				<% end %>
+			<% elsif a.asset.asset_type == 'i' %>
+				{"image": "http://localhost:3000<%= a.asset.ad_asset_file.url %>"},
+			<% end %>
+		<% end -%>
+	<% end -%>
+<% end -%>
+				
+				
+				
+				
+			];
+		<% end %>
+	
+		var image_time = 15;
+		var current_slide = 0;
+		var total_slides = slides.length;
+		var container_loading = "#slide-holder";
+		var container_images = "#slide-holder-images";
+		var container_divs = "#slide-holder-divs";
+		var container_preload = "#preload";
+		
+		<% if !@screen.nil? && @screen.direction == 'v' %>
+			var screen_vertical = true;
+		<% else %>
+			var screen_vertical = false;
+		<% end %>
+	</script>
+</head>
+<body>
+	
+	<div id="slide-holder">
+		<h1><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></h1>				
+	</div>
+	
+	<div id="slide-holder-images">
+	</div>
+	
+	<div id="slide-holder-divs">
+	</div>
+		
+	
+	<div id="preload">
+		<% if @screen.nil? %>
+			<div id="noscreens">
+				<h1 style="padding: 50px; font-size: 40px; text-transform: uppercase; font-weight: bold;">Screen ID: SHOW THE JAVASCRIPT CODE</h1>
+			</div>
+		<% else %>
+		
+		
+			<div id="draft_menu1">
+				<% @draft_drinks.each do |d| %>
+					<% if d.drink.visible? %>
+					<div class="drink">
+						<div class="drink-left">
+							<h2><span class="beer-color beer-color-level<%= d.drink.color -%>"><%= d.drink.color -%></span> <%= d.drink.brewery.display_name -%> <%= d.drink.name -%></h2>
+							<h3><%= d.drink.beer_style.name -%> <span style="opacity: .5; margin: 0 10px;">//</span> <%= number_to_percentage d.drink.abv, :precision => 1 -%> ABV</h3>
+						</div>
+						<div class="drink-right">
+							<% d.drink.prices.each do |price| %>
+								<% if price.available? %>
+									<div class="drink-size">
+										<h2><%= number_to_currency price.amount -%></h2>
+										<h4><%= price.beer_size.name-%></h4>
+									</div>
+								<% end %>
+							<% end %>
+						</div>
+						<div class="promotions">
+							<%= raw('<span class="promo-na">not available</span>') unless d.drink.visible? %>
+							<%= raw('<span class="promo-soon">coming soon</span>') if d.drink.coming_soon? %>
+							<%= raw('<span class="promo-new">new</span>') if d.drink.prices.where(is_new: true).count > 0 %>
+							<%= raw('<span class="promo-back">Returning</span>') if d.drink.prices.where(is_returning: true).count > 0 %>
+							<%= raw('<span class="promo-special">special</span>') if d.drink.prices.where(is_special: true).count > 0 %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+		
+	</div>
+		
+	<script type="text/javascript">
+		function preload() {
+			$.each(slides, function (i) {
+				$.each(this, function (media_type, src) {
+					if(media_type == "image") {
+						$(container_preload).append("<img style='display: none;' src='" + src + "' />");
+					}
+				});
+			});
+			
+			if (screen_vertical) {
+				$(container_divs).addClass('rotate-div');
+				$(container_divs).css('width', $(window).height());
+			}
+		}
+		
+		function nextSlide() {
+			current_slide = current_slide+1;
+			if (current_slide >= total_slides) {
+				current_slide = 0;
+			}
+			showSlide(current_slide);
+		}
+
+		function showSlide(slide) {
+			$.each(slides[slide], function (media_type, src) {
+				$(container_loading).hide();
+				$(container_images).hide();
+				$(container_divs).hide();
+				if(media_type == "image") {
+					$(container_images).empty();
+					$(container_images).append("<span class='helper'></span><img src='" + src + "' />");
+					$(container_images).show();
+				} else {
+					$(container_divs).empty();
+					$(container_divs).append( $("#" + src).html() );
+					$(container_divs).show();
+				}
+				setTimeout(function() { nextSlide(); }, image_time*1000);
+			});
+		}
+		
+		function reload_page() {
+		    window.location.reload(true);
+		}
+
+		$(document).ready(function() {
+			preload();
+		    setInterval(function(){ reload_page(); },60*60000);
+			setTimeout(function() {  showSlide(current_slide);  }, 500);
+		});
+
+	</script>
+		
+		
+</body>
+</html>

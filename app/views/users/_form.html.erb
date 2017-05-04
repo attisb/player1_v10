@@ -1,0 +1,25 @@
+<div class="page-form">
+	<%= form_for @user do |f| %>
+	<% if @user.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+			<ul>
+				<% @user.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+
+	<div class="page-form-label"><%= f.label :email %></div>
+	<div class="page-form-field"><%= f.text_field :email, type: 'email' %></div>
+
+	<div class="page-form-label"><%= f.label :first_name %></div>
+	<div class="page-form-field"><%= f.text_field :first_name, type: 'text' %></div>
+
+	<div class="page-form-label"><%= f.label :last_name %></div>
+	<div class="page-form-field"><%= f.text_field :last_name, type: 'text' %></div>
+
+<% end %>
+</div>

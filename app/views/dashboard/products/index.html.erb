@@ -1,0 +1,49 @@
+<% @title = "Dashboard // Products" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+				<h1>Products</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-8">
+			<ul class="list-nostyle list-nosidemargin list-padlines list-addsplitlines">
+				<% if @products.empty? %>
+					<li><span class="alert-no-items">--- no items to show ---</span></li>
+				<% else %>
+					<% @products.each do |product| %>
+						<%= render 'line_item', product: product %>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to 'Create a New Product', new_dashboard_product_path, :class => 'btn' %>
+			</div>
+
+			<h4>View Options</h4>
+			<ul class="list-nostyle list-padlines">
+				<li><%= link_to "View All Products", dashboard_products_path %></li>
+				<li><%= link_to "View Available Products", dashboard_products_path(available: 'yes') %></li>
+				<li><%= link_to "View Non Available Products", dashboard_products_path(available: 'no') %></li>
+				<% @categories.each do |cat| %>
+					<li><%= link_to "View #{cat.name} Products", dashboard_products_path(category: cat) %></li>
+				<% end %>
+			</ul>
+		</div>
+		
+	</div>
+</div>
+
+
+

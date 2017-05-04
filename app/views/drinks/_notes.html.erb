@@ -1,0 +1,19 @@
+<div id="global-notes">
+	<h3><% if signed_in? %><a href="#" class="toggle-notes small text-right">Show Your Notes</a><% end %>Drink Notes</h3>
+	<% if signed_in? %>
+		<%= render 'note_form' %>
+	<% end %>
+	<% @drink.notes.order(created_at: :asc).limit(20).each do |note| %>
+		<%= render 'note_show', n: note %>
+	<% end %>
+</div>
+
+<% if signed_in? %>
+<div id="your-notes">
+	<h3><a href="#" class="toggle-notes small text-right">Show Everyones Notes</a> Your Drink Notes</h3>
+	<%= render 'note_form' %>
+	<% current_user.notes.where(:drink_id => @drink.id).limit(20).each do |note| %>
+		<%= render 'note_show', n: note %>
+	<% end %>
+</div>
+<% end %>

@@ -1,0 +1,101 @@
+<div class="page-form">
+	<%= form_for [:dashboard, @drink] do |f| %>
+	<% if @drink.errors.any? %>
+		<div id="error_explanation">
+			<h2>You have a few errors!</h2>
+			<ul>
+				<% @drink.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<% if params[:tap_list] %>
+		<%= hidden_field_tag 'tap_list', true %>
+	<% end %>
+
+	<% if params[:available] %>
+		<%= hidden_field_tag 'available', true %>
+	<% end %>
+
+	<div class="page-form-label"><%= f.label :name %></div>
+	<div class="page-form-field"><%= f.text_field :name %></div>
+	
+	<div class="page-form-label"><%= f.label :abv %></div>
+	<div class="page-form-field"><%= f.number_field :abv, :step => 0.1 %></div>
+	
+	<div class="page-form-label"><%= f.label :ibu %></div>
+	<div class="page-form-field"><%= f.number_field :ibu %></div>
+	
+	<div class="page-form-label"><%= f.label :image %> 1920x720</div>
+	<div class="page-form-field"><%= f.file_field :image %></div>
+	
+	<div class="page-form-label"><%= f.label :beer_group_id %></div>
+	<div class="page-form-field"><%= f.select :beer_group_id, options_for_select(@beer_groups.collect { |group| [group.name.titleize, group.id] }, @drink.beer_group_id), {include_blank: true}, { id: 'select-beer-group' } %></div>
+	
+	<div class="page-form-label"><%= f.label :beer_style_id %></div>
+	<div class="page-form-field"><%= f.select :beer_style_id, options_for_select(@beer_styles.collect { |style| [style.name.titleize, style.id] }, @drink.beer_style_id), {include_blank: true}, { id: 'select-beer-style' } %></div>
+	
+	<div class="page-form-label"><%= f.label :brewery_id %></div>
+	<div class="page-form-field"><%= f.select :brewery_id, options_for_select(@breweries.collect { |brewery| [brewery.name.titleize, brewery.id] }, @drink.brewery_id), {include_blank: true}, { id: 'select-brewery' } %></div>
+	
+	<div class="page-form-label"><%= f.label :description %></div>
+	<div class="page-form-field"><%= f.text_area :description %></div>
+	
+	<div class="page-form-label"><%= f.label :short_description %></div>
+	<div class="page-form-field">
+		<%= f.text_area :short_description, {:maxlength => 200} %>
+		<div class="text-right"><span id="letter-count">200</span> characters remaining</div>
+	</div>
+	
+	<div class="page-form-label"><%= f.label :color %></div>
+	<div class="page-form-field beer-color-form">
+		<% (1..4).each do |i| %>
+			<%= f.radio_button :color, i %>
+			<%= f.label "color_#{i}", :class => "beer-color-level#{i}" do %>
+				<i class="fa fa-check"></i>
+			<% end %>
+		<% end %>
+		<br/>&nbsp;
+	</div>
+	
+	<div class="page-form-field"><%= f.check_box :visible %> <%= f.label :visible %></div>
+	
+	<div class="page-form-label"><%= f.check_box :coming_soon %> <%= f.label :coming_soon %></div>
+	
+	<h4>Prices</h4>
+	<%= f.fields_for :prices do |p| %>
+		Size: <%= get_beer_name(p.object.beer_size_id) %><br/>
+		<%= p.hidden_field :beer_size_id %>
+	
+		<%= p.label :amount, "Price" %>
+		<%= p.text_field :amount %>
+
+	
+		<%= p.check_box :available, :id => "check_avail#{p.object.beer_size_id}" %> <%= p.label 'Available', :for => "check_avail#{p.object.beer_size_id}"%>
+		<span class="divider"></span>
+		<%= p.check_box :is_special, :id => "check_special#{p.object.beer_size_id}" %> <%= p.label 'Special', :for => "check_special#{p.object.beer_size_id}"%>
+		<span class="divider"></span>
+		<%= p.check_box :is_new, :id => "check_new#{p.object.beer_size_id}" %> <%= p.label 'New', :for => "check_new#{p.object.beer_size_id}"%>
+		<span class="divider"></span>
+		<%= p.check_box :is_returning, :id => "check_return#{p.object.beer_size_id}" %> <%= p.label 'Returning', :for => "check_return#{p.object.beer_size_id}"%>
+		<br/><br/>
+	<% end %>
+	
+	
+	<div class="btn-bar">
+		<%= link_to 'Cancel', dashboard_drinks_path, :class => 'btn btn-cancel'%>
+		<%= f.submit 'Save Drink' %>
+	</div>
+<% end %>
+</div>
+
+
+<script type="text/javascript">
+	var maxLength = 200;
+	$('#drink_short_description').keyup(function() {
+	  var length = $(this).val().length;
+	  var length = maxLength-length;
+	  $('#letter-count').text(length);
+	});
+</script>

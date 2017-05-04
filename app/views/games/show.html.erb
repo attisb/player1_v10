@@ -1,0 +1,38 @@
+<% @title = "Games // #{@game.name}" %>
+
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<%= image_tag @game.hero_image %>
+	</div>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<%= link_to 'Back to Games', games_path, :class => "back-btn" %>
+					<h1><%= @game.name %></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<%= simple_format @game.description %>
+				
+			</div>
+
+			<div class="col-4">
+				<h3>Available On</h3>
+				<ul class="list-nostyle list-nosidemargin">
+				<% @game.game_consoles.order(:name).each do |console| %>
+					<li><%= link_to console.name, games_system_path(console) %></li>
+				<% end %>
+				</ul>
+				
+				<h3>Box Cover</h3>
+				<%= image_tag @game.cover_image, :style => 'width: 100%;'%>
+			</div>
+		</div>
+	</div>

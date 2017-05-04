@@ -1,0 +1,38 @@
+<% @title = "Dashboard // Everything Available" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Everything Available</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<h3>What's Listed as Available</h3>
+				<ul class="list-nostyle list-nosidemargin list-padlines">
+					<% @drinks.each do |drink| %>
+					  <li>
+						  <strong><%= link_to drink.name, edit_dashboard_drink_path(drink, available: true) %></strong></br>
+						  <% drink.prices.each do |price| %>
+						  	<%= raw "<span class='small'>#{price.beer_size.name} for #{number_to_currency price.amount}</span><br/>" if price.available %>
+						  <% end %>
+						  </br>
+					  </li>
+					<% end %>
+				</ul>
+			</div>
+			
+			<div class="col-4">
+				<h3>Find Drinks</h3>
+				<%= render 'dashboard/search/form', the_type: 'drinks' %>
+			</div>
+		</div>
+	</div>
+	

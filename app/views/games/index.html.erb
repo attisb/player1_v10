@@ -1,0 +1,79 @@
+<% @title = 'Games' %>
+
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<img src="/i/hero-games.jpg" />
+	</div>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<% if params[:type] == "system" %>
+						<h1><%= @game_system.name -%> Games</h1>
+					<% elsif params[:type] == "category" %>
+						<h1>Games</h1>
+					<% else %>
+						<h1>Game Systems</h1>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-9">
+
+				<% if params[:type] == "system" %>
+					<ul class="list-nostyle list-padmargins">
+						<% @categories.each do |game| %>
+							<li>
+								<%= link_to games_category_path(@game_system, game) do %><strong class="large"><%= game.name %></strong><% end %><br/>
+							</li>
+						<% end %>
+					</ul>
+				<% elsif params[:type] == "category" %>
+					<ul class="list-nostyle list-padmargins">
+						<% @games.each do |game| %>
+							<li>
+								<%= link_to games_by_name_path(game) do %><strong class="large"><%= game.name %></strong><% end %><br/>
+							</li>
+						<% end %>
+					</ul>
+				<% else %>
+					<h3>Current Systems</h3>
+					<ul class="list-nostyle list-padmargins">
+						<% @game_systems1.each do |game| %>
+							<li>
+								<%= link_to games_system_path(game) do %><strong class="large"><%= game.name %></strong><% end %><br/>
+							</li>
+						<% end %>
+					</ul>
+
+					<h3>Older Systems</h3>
+					<ul class="list-nostyle list-padmargins">
+						<% @game_systems2.each do |game| %>
+							<li>
+								<%= link_to games_system_path(game) do %><strong class="large"><%= game.name %></strong><% end %><br/>
+							</li>
+						<% end %>
+					</ul>
+
+					<!-- <h3>Classic Systems</h3>
+					<ul class="list-nostyle list-padmargins">
+						<% @game_systems3.each do |game| %>
+							<li>
+								<%= link_to games_path(game) do %><strong class="large"><%= game.name %></strong><% end %><br/>
+							</li>
+						<% end %>
+					</ul> -->
+				<% end %>
+			</div>
+
+			<div class="col-3">
+				<h3>Game Rental</h3>
+				<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,44 @@
+<% @title = "Dashboard // Categories" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+				<h1>Categories</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-8">
+			<ul class="list-nostyle list-nosidemargin list-padlines list-addsplitlines">
+				<% if @categories.empty? %>
+					<li><span class="alert-no-items">--- no items to show ---</span></li>
+				<% else %>
+					<% @categories.each do |category| %>
+						<%= render 'line_item', category: category %>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to 'Create a New Category', new_dashboard_category_path, :class => 'btn' %>
+			</div>
+			
+			<h4>View Options</h4>
+			<ul class="list-nostyle list-padlines">
+				<li><%= link_to "View All Categories", dashboard_categories_path %></li>
+				<li><%= link_to "View Merchandise Only", dashboard_categories_path(type: 'merch') %></li>
+				<li><%= link_to "View Games Only", dashboard_categories_path(type: 'games') %></li>
+				<li><%= link_to "View Events Only", dashboard_categories_path(type: 'event') %></li>
+			</ul>
+		</div>
+		
+	</div>
+</div>

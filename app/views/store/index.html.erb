@@ -1,0 +1,38 @@
+<% @title = 'Merch' %>
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<img src="/i/hero-merch.jpg" />
+	</div>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-7">
+					<h1>Merchandise</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="btn-bar">
+				<div class="snipcart-summary">
+					<a href="#" class="snipcart-checkout btn">Your Cart (<span class="snipcart-total-price"></span>)</a>
+				</div>
+			</div>
+			
+			<% if @products.empty? %>
+				<span class="alert-no-items">--- no upcoming events ---</span>
+			<% else %>
+				<% @products.each do |product| %>
+					<div class="col-3">
+						<%= link_to product_path(product) do %>
+							<%= image_tag 'http://placehold.it/300', :style => 'width: 100%;' %>
+							<%= product.name %>
+						<% end %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>

@@ -1,0 +1,7 @@
+<li class="large">
+	<a href="#"><strong><%= link_to beer_style.name, [:dashboard, beer_style] -%></strong></a>
+	<div class="btn-bar">
+		<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit'), edit_dashboard_beer_style_path(beer_style), :class => 'btn' %>
+		<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete'), dashboard_beer_style_path(beer_style), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+	</div>
+</li>

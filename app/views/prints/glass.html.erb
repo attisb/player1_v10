@@ -1,0 +1,122 @@
+<div>
+<img height="70" src="<%= asset_path("head_logo.png") %>" />
+<h1 class="nomargin text-right"><%= @drink_sizes.name -%> Menu</h1>
+<div style="position: absolute; top: 0; right: 0;">All prices include tax</div>
+</div>
+
+<div class="columns">
+	<% @beer_groups.each do |group| %>
+	<h3><%= group.name -%></h3>
+		<% @drinks.each do |drink| %>
+			<% if drink.drink.beer_group_id == group.id %>
+				<% if drink.drink.prices.where(is_new: true).count > 0 %>
+					<div class="nowrap item new">
+				<% elsif drink.drink.prices.where(is_special: true).count > 0 %>
+					<div class="nowrap item special">
+				<% elsif drink.drink.prices.where(is_returning: true).count > 0 %>
+					<div class="nowrap item back">
+				<% else %>
+					<div class="nowrap item">
+				<% end %>
+					<ul class="list-nostyle list-nosidemargin list-stats">
+						<li><strong><%= drink.drink.brewery.display_name.titleize -%> <%= drink.drink.name.titleize -%></strong></li>
+						<li>
+							<%= simple_format drink.drink.short_description.humanize, :class => 'nomargin' %>
+						</li>
+						<li>
+							<span><%= drink.drink.abv -%>% ABV</span>
+							<%= drink.drink.beer_style.name -%>
+						</li>
+						<li>
+							<span>
+								<% drink.drink.prices.each do |price| %>
+									<% if price.available && price.beer_size_id == @drink_sizes.id %>
+										<% if price.is_special %>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= price.beer_size.name -%> (<%= number_to_currency price.amount %> <i class="fa fa-star" aria-hidden="true"></i>)
+										<% else %>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= price.beer_size.name -%> (<%= number_to_currency price.amount %>)
+										<% end %>
+									<% end %>
+								<% end %>
+							</span>
+							<% if drink.drink.color == 1 %>
+								<strong>Color: </strong> Light
+							<% elsif drink.drink.color == 2 %>
+								<strong>Color: </strong> Amber
+							<% elsif drink.drink.color == 3 %>
+								<strong>Color: </strong> Brown
+							<% elsif drink.drink.color == 4 %>
+								<strong>Color: </strong> Dark
+							<% end %>
+						</li>
+					</ul>
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+
+	<!-- <% for i in 1..2 %>
+	<div class="nowrap item">
+		<strong><%= i -%> Abita's Purple Haze</strong><br/>
+		<p class="nomargin">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.</p>
+		<p class="nomargin">
+			<span class="text-right">8% ABV</span>
+			American Double / Imperial Pilsner
+		</p>
+		<p class="nomargin">
+			<strong>Sizes</strong>
+			// Pint Draft ($6)
+			// Growler ($20)
+			// 3oz Draft ($6)
+		</p>
+	</div>
+	<% end %> -->
+
+<style type="text/css">
+
+	* {font-size: 12px !important; line-height: 120% !important;}
+	h1 {font-size: 40px !important; line-height: 70px !important;}
+	h3 {font-size: 20px !important; line-height: 20px !important;}
+	  .columns {
+	    column-count: 2;
+	    -webkit-column-count: 2;
+	    -moz-column-count: 2;
+	  }
+	  
+	  .item {margin-bottom: 15px; width: 100%; box-sizing: border-box; position: relative;}
+	  p {margin-bottom: 3px !important; font-size: 11px !important;}
+	  .item.new {border: 1px solid #000; padding: 5px; background: #eee;}
+	  .item.special {border: 1px solid #bbb; padding: 5px;}
+	  .item.back {border: 1px solid #bbb; padding: 5px;}
+	  
+	  .item.new:after, .item.special:after, .item.back:after {
+	  	position: absolute;
+	  	top: 0px;
+	  	right: 0px;
+	  	font-size: 9px;
+	  	font-weight: bold;
+	  	padding: 3px 3px 3px 6px;
+	  	letter-spacing: 1px;
+	  	border-bottom-left-radius: 8px;
+	  }
+	  
+	  .item.new:after {
+	  	content: "NEW";
+	  	color: #fff;
+	  	background: #FF003C;
+	  }
+	  
+	  .item.special:after {
+	  	content: "SPECIAL";
+	  	color: #000;
+	  	background: #FABE28;
+	  }
+	  
+	  .item.back:after {
+	  	content: "BACK IN";
+	  	color: #fff;
+	  	background: #00C176;
+	  }
+	  
+</style>

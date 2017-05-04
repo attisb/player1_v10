@@ -1,0 +1,65 @@
+<% @title = "Dashboard" %>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+					<h1>Drinks Dashboard</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<% if signed_in? && current_user.admin? %>
+			<div class="row">
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-archive" aria-hidden="true"></i>Beer Groups'), dashboard_beer_groups_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-list" aria-hidden="true"></i>Beer Styles'), dashboard_beer_styles_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-arrows-v" aria-hidden="true"></i>Beer Sizes'), dashboard_beer_sizes_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-list-alt" aria-hidden="true"></i>Breweries'), dashboard_breweries_path, :class => 'admin-button'%>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-beer" aria-hidden="true"></i>Drinks'), dashboard_drinks_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-print" aria-hidden="true"></i>Tap List'), dashboard_drafts_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-check" aria-hidden="true"></i>Available'), dashboard_availables_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					&nbsp;
+				</div>
+			</div>
+
+		<% else %>
+			<div class="row">
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-list-alt" aria-hidden="true"></i>Breweries'), dashboard_breweries_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-beer" aria-hidden="true"></i>Drinks'), dashboard_drinks_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-print" aria-hidden="true"></i>Tap List'), dashboard_drafts_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<a href="#" class="admin-button"><i class="fa fa-check" aria-hidden="true"></i>Available</a>
+				</div>
+				<div class="col-3">
+					&nbsp;
+				</div>
+			</div>
+		<% end %>
+	</div>

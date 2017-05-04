@@ -1,0 +1,61 @@
+<% @title = "Dashboard" %>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1>Dashboard</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<% if signed_in? && current_user.admin? %>
+			<div class="row">
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-beer" aria-hidden="true"></i>Drinks'), dashboard_admin_drinks_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-calendar" aria-hidden="true"></i>Events'), dashboard_events_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-tv" aria-hidden="true"></i>Screens'), dashboard_admin_screens_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-users" aria-hidden="true"></i>Users'), dashboard_users_path, :class => 'admin-button'%>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-shopping-bag" aria-hidden="true"></i>Merchandise'), dashboard_products_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-gamepad" aria-hidden="true"></i>Games'), dashboard_games_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-archive" aria-hidden="true"></i>Categories'), dashboard_categories_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-print" aria-hidden="true"></i>Printer'), prints_path, :class => 'admin-button'%>
+				</div>
+			</div>
+		<% else %>
+			<div class="row">
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-beer" aria-hidden="true"></i>Drinks'), dashboard_admin_drinks_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-gamepad" aria-hidden="true"></i>Games'), dashboard_games_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-calendar" aria-hidden="true"></i>Events'), dashboard_events_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-print" aria-hidden="true"></i>Printer'), prints_path, :class => 'admin-button'%>
+				</div>
+			</div>
+		<% end %>
+	</div>
+
+

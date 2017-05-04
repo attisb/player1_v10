@@ -1,0 +1,9 @@
+<li class="large">
+	<a href="#"><strong><%= link_to game.name, [:dashboard, game] -%></strong></a>
+	<div class="btn-bar">
+		<span class="small">Date: <%= game.name %></span>
+		<span class="divider"></span>
+		<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit'), edit_dashboard_game_path(game), :class => 'btn' %>
+		<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete'), dashboard_game_path(game), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+	</div>
+</li>

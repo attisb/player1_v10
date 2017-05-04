@@ -1,0 +1,30 @@
+<% @title = "Dashboard // Edit Drink" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Edit Drink</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			
+<%= render 'form' %>
+
+		</div>
+		
+		<div class="col-4">
+<%= image_tag @drink.image, :width => '100%' %>	
+		
+<%= render 'help' %>
+		</div>
+	</div>
+</div>
+

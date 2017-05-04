@@ -1,0 +1,62 @@
+<% @title = "Dashboard // Brewery // #{@brewery.name}" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Brewery // <%= @brewery.name -%></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			<%= simple_format @brewery.description %>
+			<p>
+				<strong>Display Name:</strong>
+				<%= @brewery.display_name %>
+			</p>
+			<p>
+				<strong>Country:</strong>
+				<%= @brewery.country.name %>
+			</p>
+			<p>
+				<strong>State:</strong>
+				<%= @brewery.state.name %>
+			</p>
+			<p>
+				<strong>Established:</strong>
+				<%= @brewery.established %>
+			</p>
+			<p>
+				<strong>Facebook URL:</strong>
+				<%= @brewery.facebook %>
+			</p>
+			<p>
+				<strong>Twitter URL:</strong>
+				<%= @brewery.twitter %>
+			</p>
+			<p>
+				<strong>Instagram URL:</strong>
+				<%= @brewery.instagram %>
+			</p>
+			<p>
+				<strong>Website:</strong>
+				<%= @brewery.website %>
+			</p>
+		</div>
+			
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit Brewery'), edit_dashboard_brewery_path(@brewery), :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Brewery'), dashboard_brewery_path(@brewery), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-file-o" aria-hidden="true"></i> Create Brewery'), new_dashboard_brewery_path, :class => 'btn btn-cancel' %>
+				<%= link_to 'Back to Brewery List', dashboard_breweries_path, :class => 'btn btn-cancel' %>
+			</div>
+		</div>
+	</div>
+</div>

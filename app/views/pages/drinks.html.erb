@@ -1,0 +1,113 @@
+<% @title = 'Drinks' %>
+
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<img src="/i/hero-drinks.jpg" />
+	</div>
+	
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<% if @beer_groups %>
+						<h1>Drinks</h1>
+					<% elsif @beer_styles %>
+						<h1>Beer Styles</h1>
+					<% elsif @breweries %>
+						<h1>Breweries</h1>
+					<% elsif @countries %>
+						<h1>Countries</h1>
+					<% elsif @states %>
+						<h1>US States</h1>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<ul class="list-nostyle list-nosidemargin list-padlines">
+				<% if @beer_groups %>
+					<% @beer_groups.each do |beer_group| %>
+						<% if beer_group.drinks.where(visible: true).count > 0 %>
+						<%= render 'drinks_line_item', beer: beer_group, link: drinks_by_group_path(beer_group) %>
+						<% end %>
+					<% end %>
+				<% elsif @beer_styles %>
+					<% @beer_styles.each do |beer_group| %>
+						<% if beer_group.drinks.where(visible: true).count > 0 %>
+						<%= render 'drinks_line_item', beer: beer_group, link: drinks_by_style_path(beer_group) %>
+						<% end %>
+					<% end %>
+				<% elsif @breweries %>
+					<% @breweries.each do |beer_group| %>
+						<% if beer_group.drinks.where(visible: true).count > 0 %>
+						<%= render 'drinks_line_item', beer: beer_group, link: drinks_by_brewery_path(beer_group) %>
+						<% end %>
+					<% end %>
+				<% elsif @countries %>
+					<% @countries.each do |beer_group| %>
+						<% if beer_group.drinks.where(visible: true).count > 0 %>
+						<%= render 'drinks_line_item', beer: beer_group, link: drinks_by_country_path(beer_group) %>
+						<% end %>
+					<% end %>
+				<% elsif @states %>
+					<% @states.each do |beer_group| %>
+						<% if beer_group.drinks.where(visible: true).count > 0 %>
+						<%= render 'drinks_line_item', beer: beer_group, link: drinks_by_state_path(beer_group) %>
+						<% end %>
+					<% end %>
+				<% end %>
+			</div>
+			<div class="col-4">
+				<% if @breweries %>
+				<h3>Narrow by Letter</h3>
+				<ul class="list-nostyle list-nosidemargin list-padlines">
+					<li class="list-letters">
+					<% ("a".."z").each do |letter| %>
+						<%= link_to "[#{letter.upcase}]", drinks_brewery_letter_path(:id => letter) %>
+					<% end %>
+					</li>
+					<li class="list-letters"><%= link_to drinks_brewery_path do %>[all]<% end %></li>
+				</ul>				
+				<div style="clear: both;"></div>
+				<% elsif @countries %>
+				<h3>Narrow by Letter</h3>
+				<ul class="list-nostyle list-nosidemargin list-padlines">
+					<li class="list-letters">
+					<% ("a".."z").each do |letter| %>
+						<%= link_to "[#{letter.upcase}]", drinks_country_letter_path(:id => letter) %>
+					<% end %>
+					</li>
+					<li class="list-letters"><%= link_to drinks_country_path do %>[all]<% end %></li>
+				</ul>				
+				<div style="clear: both;"></div>
+				<% end %>
+										
+				<h3>View By</h3>
+				<ul class="list-nostyle list-nosidemargin list-padlines">
+					<li><%= link_to drinks_path do %><strong>By Category</strong><% end %></li>
+					<li><%= link_to drinks_by_draft_path do %><strong>On Draft Only</strong><% end %></li>
+					<li><%= link_to drinks_by_bottle_path do %><strong>Cans &amp; Bottles Only</strong><% end %></li>
+					<li><%= link_to drinks_styles_path do %><strong>Beer Styles</strong><% end %></li>
+					<li><%= link_to drinks_latest_path do %><strong>Last Added</strong><% end %></li>
+					<li><%= link_to drinks_soon_path do %><strong>Coming Soon</strong><% end %></li>
+					<li><%= link_to drinks_special_path do %><strong>On Special</strong><% end %></li>
+					<li><%= link_to drinks_brewery_path do %><strong>By Brewery</strong><% end %></li>
+					<li><%= link_to drinks_country_path do %><strong>By Country</strong><% end %></li>
+					<li><%= link_to drinks_state_path do %><strong>By US States</strong><% end %></li>
+					<li>
+						<strong>Color: </strong>
+						<span class="nowrap large">
+							<%= link_to drinks_by_color_path(1) do %><i class="fa fa-circle beer-color-level1" aria-hidden="true"></i><% end %>
+							<%= link_to drinks_by_color_path(2) do %><i class="fa fa-circle beer-color-level2" aria-hidden="true"></i><% end %>
+							<%= link_to drinks_by_color_path(3) do %><i class="fa fa-circle beer-color-level3" aria-hidden="true"></i><% end %>
+							<%= link_to drinks_by_color_path(4) do %><i class="fa fa-circle beer-color-level4" aria-hidden="true"></i><% end %>
+					    </span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>

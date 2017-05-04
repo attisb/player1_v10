@@ -1,0 +1,81 @@
+<% @title = "Dashboard // Screen // #{@screen.name}" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Screen Dashboard', dashboard_admin_screens_path %></h5>
+				<h1>Screen // <%= @screen.name -%></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			<%= simple_format @screen.location %>
+			<h4>Playlists</h4>
+			<ul class="list-nostyle list-stats">
+			<% @screen_orders.order(order: :asc).each do |playlist| %>
+				<% if playlist.playlist.date_show < DateTime.now %>
+				<li>
+					<%= form_for [:dashboard, playlist], :method => :patch do |g| %>
+					<%= playlist.playlist.name %>
+					<%= g.text_field :order %>
+					
+					<ul>
+						<li><strong>Assets</strong></li>
+						<% playlist.playlist.playlist_orders.order(order: :asc).each do |a| %>
+							<li><%= a.asset.name -%></li>
+						<% end%>
+					</ul>
+					
+					<div class="btn-bar">
+						<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete'), dashboard_screen_order_path(playlist), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+						<%= g.submit 'Update' %>
+					</div>
+					<% end %>
+				</li>
+				<% end %>
+			<% end %>
+			</ul>
+			
+			
+			
+			<h4>Screen Order</h4>
+			<ul>
+			<% @screen_orders.order(order: :asc).each do |p| %>
+				<% if p.playlist.date_show < DateTime.now %>
+				<% p.playlist.playlist_orders.order(order: :asc).each do |a| %>
+					<li><%= a.asset.name %></li>
+				<% end %>
+				<% end %>
+			<% end %>
+			</ul>
+		</div>
+			
+		<div class="col-4">
+			<h4>Add Playlist to Screen</h4>
+			<%= form_for [:dashboard, @screen_order] do |f| %>
+				<%= hidden_field_tag 'screen_order[screen_id]', @screen.id %>
+				<%= select_tag "screen_order[playlist_id]", options_from_collection_for_select(@playlists, 'id', 'name')%>
+				<%= number_field_tag 'screen_order[order]' %>
+				<div class="btn-bar">
+					<%= submit_tag 'Add' %>
+				</div>
+				<br/>
+			<% end %>
+
+			<div class="btn-bar btn-sidebar">
+				<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit Screen'), edit_dashboard_screen_path(@screen), :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Screen'), dashboard_screen_path(@screen), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-file-o" aria-hidden="true"></i> Create Screen'), new_dashboard_screen_path, :class => 'btn btn-cancel' %>
+				<%= link_to 'Back to Category List', dashboard_screens_path, :class => 'btn btn-cancel' %>
+			</div>
+		</div>
+	</div>
+</div>
+
+

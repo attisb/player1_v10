@@ -1,0 +1,46 @@
+<% @title = "Dashboard // Drink Styles" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Drink Styles</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-8">
+			<ul class="list-nostyle list-nosidemargin list-padlines list-addsplitlines">
+				<% if @beer_styles.empty? %>
+					<li><span class="alert-no-items">--- no items to show ---</span></li>
+				<% else %>
+					<% @beer_styles.each do |beer_style| %>
+						<%= render 'line_item', beer_style: beer_style %>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to 'Create a New Drink Style', new_dashboard_beer_style_path, :class => 'btn' %>
+			</div>
+			
+			<h4>View Options</h4>
+			<ul class="list-nostyle list-padlines">
+				<li><%= link_to "View All Styles", dashboard_beer_styles_path %></li>
+				<li class="list-letters">
+				<% ("a".."z").each do |letter| %>
+					<%= link_to "[#{letter.upcase}]", dashboard_beer_styles_path(:letter => letter) %>
+				<% end %>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+</div>

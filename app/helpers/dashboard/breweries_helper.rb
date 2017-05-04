@@ -1,0 +1,2 @@
+module Dashboard::BreweriesHelper
+end

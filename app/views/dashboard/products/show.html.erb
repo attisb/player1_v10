@@ -1,0 +1,31 @@
+<% @title = "Dashboard // Product // #{@product.name}" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+				<h1>Product // <%= @product.name -%></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			<%= simple_format @product.description %>
+			<%= @product.available %>
+		</div>
+			
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit Product'), edit_dashboard_product_path(@product), :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Product'), dashboard_product_path(@product), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-file-o" aria-hidden="true"></i> Create Product'), new_dashboard_product_path, :class => 'btn btn-cancel' %>
+				<%= link_to 'Back to Product List', dashboard_products_path, :class => 'btn btn-cancel' %>
+			</div>
+		</div>
+	</div>
+</div>

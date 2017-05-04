@@ -1,0 +1,38 @@
+	<!-- Begin Header -->
+	<header>
+		<nav id="main">
+			<%= link_to 'Player 1 // Home', root_path, :id => 'logo' %>
+			<label for="show-menu" class="show-menu">Show Menu</label>
+			<input type="checkbox" id="show-menu" role="button">
+			<% if signed_in? && (current_user.admin? || current_user.moderator?) %>
+				<%= link_to 'Search', dashboard_search_path, :id => 'header-search'%>
+			<% else %>
+				<a href="#" id="header-search">Search</a>
+			<% end %>
+			<ul id="header-menu">
+				<% if signed_in? && (current_user.admin? || current_user.moderator?) %>
+				<li><%= link_to 'Drinks', drinks_path %></li>
+				<li><%= link_to 'Games', games_path %></li>
+				<li><%= link_to 'Merch', products_path %></li>
+				<li><%= link_to 'Events', events_path %></li>
+				<li><%= link_to 'About', rules_path %></li>
+				<li class="hide">//</li>
+				<li><%= link_to 'Go to Dashboard', dashboard_home_path %></li>
+				<% else %>
+				<li><%= link_to 'Drinks', drinks_path %></li>
+				<li><%= link_to 'Games', games_path %></li>
+				<li><%= link_to 'Merch', products_path %></li>
+				<li><%= link_to 'Events & Packages', events_path %></li>
+				<li><%= link_to 'About', rules_path %></li>
+				<% end %>
+				<li class="hide">//</li>
+				<% if signed_in? %>
+				<li class="header-menu-small"><%= link_to "Hi, #{current_user.first_name.titleize}", edit_user_path(current_user) %></li>
+				<li class="header-menu-small"><%= link_to 'Sign Out', sign_out_path, method: :delete %></li>
+				<% else %>
+				<li class="header-menu-small"><%= link_to 'Sign In', sign_in_path %></li>
+				<li class="header-menu-small"><%= link_to 'Sign Up', sign_up_path %></li>
+				<% end %>
+			</ul>
+		</nav>
+	</header>

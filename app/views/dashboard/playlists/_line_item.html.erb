@@ -1,0 +1,7 @@
+<li class="large">
+	<a href="#"><strong><%= link_to playlist.name, [:dashboard, playlist] -%></strong> (<%= playlist.enabled.to_s.titleize -%>)</a>
+	<div class="btn-bar">
+		<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit'), edit_dashboard_playlist_path(playlist), :class => 'btn' %>
+		<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete'), dashboard_playlist_path(playlist), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+	</div>
+</li>

@@ -1,0 +1,33 @@
+<div class="page-form">
+	<%= form_for [:dashboard, @beer_group] do |f| %>
+	<% if @beer_group.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@beer_group.errors.count, "error") %> prohibited this beer_group from being saved:</h2>
+			<ul>
+				<% @beer_group.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="page-form-label"><%= f.label :name %></div>
+	<div class="page-form-field"><%= f.text_field :name %></div>
+
+	<div class="page-form-label"><%= f.label :description %></div>
+	<div class="page-form-field"><%= f.text_area :description %></div>
+
+	<div class="page-form-label"><%= f.label :order, 'Order to Display' %></div>
+	<div class="page-form-field"><%= f.number_field :order %></div>
+
+	<div class="page-form-label">
+		<%= f.label :visible, 'Visible to Users' %>
+		<%= f.check_box :visible %>
+	</div>
+
+	<div class="btn-bar">
+		<%= link_to 'Cancel', dashboard_beer_groups_path, :class => 'btn btn-cancel'%>
+		<%= f.submit 'Save Drink Group' %>
+	</div>
+<% end %>
+</div>

@@ -1,0 +1,58 @@
+<% @title = "Dashboard // Playlist // #{@playlist.name}" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Screen Dashboard', dashboard_admin_screens_path %></h5>
+				<h1>Playlist // <%= @playlist.name -%></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">			
+			<h4>Assets</h4>
+			<ul class="list-nostyle list-stats">
+			<% @playlist_orders.order(order: :asc).each do |playlist| %>
+				<li>
+					<%= form_for [:dashboard, playlist], :method => :patch do |g| %>
+					<%= playlist.asset.name %>
+					<%= g.text_field :order %>
+					<div class="btn-bar">
+						<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete'), dashboard_playlist_order_path(playlist), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+						<%= g.submit 'Update' %>
+					</div>
+					<% end %>
+				</li>
+			<% end %>
+			</ul>
+			
+		</div>
+			
+		<div class="col-4">
+			<h4>Add Item to Playlist</h4>
+			<%= form_for [:dashboard, @playlist_order] do |f| %>
+				<%= hidden_field_tag 'playlist_order[playlist_id]', @playlist.id %>
+				<%= select_tag "playlist_order[asset_id]", options_from_collection_for_select(@assets, 'id', 'name')%>
+				<%= number_field_tag 'playlist_order[order]' %>
+				<div class="btn-bar">
+					<%= submit_tag 'Add' %>
+				</div>
+				<br/>
+			<% end %>
+
+			<div class="btn-bar btn-sidebar">
+				<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit Playlist'), edit_dashboard_playlist_path(@playlist), :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Playlist'), dashboard_playlist_path(@playlist), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-file-o" aria-hidden="true"></i> Create Playlist'), new_dashboard_playlist_path, :class => 'btn btn-cancel' %>
+				<%= link_to 'Back to Playlist List', dashboard_playlists_path, :class => 'btn btn-cancel' %>
+			</div>
+		</div>
+	</div>
+</div>
+
+

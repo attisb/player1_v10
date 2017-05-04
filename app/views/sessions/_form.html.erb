@@ -1,0 +1,21 @@
+<div class="page-form">
+	<%= form_for :session, url: session_path do |form| %>
+
+	<div class="page-form-label"><%= form.label :email %></div>
+	<div class="page-form-field"><%= form.text_field :email, type: 'email', :placeholder => 'your email address' %></div>
+
+	<div class="page-form-label"><%= form.label :password %></div>
+	<div class="page-form-field"><%= form.password_field :password %></div>
+
+	<div class="btn-bar">
+		<% if Clearance.configuration.allow_sign_up? %>
+		<strong><%= link_to 'Sign Up', sign_up_path -%></strong>
+		<span class="divider"></span>
+		<% end %>
+		<strong><%= link_to 'Forgot Your Password', new_password_path -%></strong>
+		<%= form.submit %>
+	</div>
+
+
+	<% end %>
+</div>

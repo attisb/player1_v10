@@ -1,0 +1,36 @@
+<% @title = "Dashboard // Drink Style // #{@beer_style.name}" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Drink Style // <%= @beer_style.name -%></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			<%= simple_format @beer_style.description %>
+			<p>
+				<strong>ABV Range:</strong>
+				<%= number_to_percentage @beer_style.abv_range_start, :precision => 1 -%>
+				-
+				<%= number_to_percentage @beer_style.abv_range_end, :precision => 1 -%>
+			</p>
+		</div>
+			
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit Drink Style'), edit_dashboard_beer_style_path(@beer_style), :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Drink Style'), dashboard_beer_style_path(@beer_style), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-file-o" aria-hidden="true"></i> Create Drink Style'), new_dashboard_beer_style_path, :class => 'btn btn-cancel' %>
+				<%= link_to 'Back to Beer Style List', dashboard_beer_styles_path, :class => 'btn btn-cancel' %>
+			</div>
+		</div>
+	</div>
+</div>

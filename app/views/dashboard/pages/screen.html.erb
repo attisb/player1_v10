@@ -1,0 +1,33 @@
+<% @title = "Dashboard" %>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+					<h1>Ad Screen Dashboard</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<% if signed_in? && current_user.admin? %>
+			<div class="row">
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-tv" aria-hidden="true"></i>Screens'), dashboard_screens_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-bars" aria-hidden="true"></i>Playlists'), dashboard_playlists_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					<%= link_to raw('<i class="fa fa-film" aria-hidden="true"></i>Ad Assets'), dashboard_assets_path, :class => 'admin-button'%>
+				</div>
+				<div class="col-3">
+					&nbsp;
+				</div>
+			</div>
+		<% end %>
+	</div>
+
+

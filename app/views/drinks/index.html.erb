@@ -1,0 +1,108 @@
+<% if params[:type].blank? %>
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<img src="/i/hero-drinks.jpg" />
+	</div>
+<% else %>
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<%= link_to 'Back to Drinks', drinks_path, :class => 'back-btn' %>
+					<% if params[:type] == "country" ||  params[:type] == "state" %>
+						<h1>Breweries</h1>
+					<% else %>
+						<% if params[:type]  == "draft" %>
+							<% @title = 'Drafts' %>
+							<h1>Drafts</h1>
+						<% elsif params[:type]  == "bottle" %>
+							<% @title = 'Cans & Bottles' %>						
+							<h1>Cans &amp; Bottles</h1>
+						<% elsif params[:type]  == "latest" %>
+							<% @title = 'Latest Drinks' %>						
+							<h1>Latest Drinks</h1>
+						<% elsif params[:type]  == "soon" %>
+							<% @title = 'Coming Soon' %>						
+							<h1>Coming Soon</h1>
+						<% elsif params[:type]  == "special" %>
+							<% @title = 'Drinks on Special' %>						
+							<h1>Drinks on Special</h1>
+						<% elsif params[:type]  == "color" %>
+							<% @title = 'Find by Color' %>						
+							<h1>Find by Color</h1>
+						<% elsif params[:type]  == "brewery" %>
+							<% @title = @page_name.name.titleize %>						
+							<h1><%= @page_name.name %></h1>
+						<% elsif params[:type]  == "group" %>
+							<% @title = @page_name.name.titleize %>						
+							<h1><%= @page_name.name %></h1>
+						<% elsif params[:type]  == "styles" %>
+							<% @title = @page_name.name.titleize %>						
+							<h1><%= @page_name.name %></h1>
+						<% else %>
+							<h1>Drinks</h1>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				
+				<div class="btn-bar">
+				<% if signed_in? %>
+					<a href="#" id="hide-had-btn" class="btn">Hide Drinks I've Had</a>
+				<% end %>
+				</div>
+				
+				
+<ul class="list-nostyle list-nosidemargin list-superpadlines">
+	<% if params[:type] == "country" ||  params[:type] == "state" %>
+		<% @breweries.each do |brewery| %>
+			<% if brewery.drinks.where(visible: true).count > 0 %>
+			<li>
+				<strong><%= link_to brewery.name, drinks_by_brewery_path(brewery) %></strong><br/><div class="small"><%= brewery.state.name -%> - <%= brewery.country.name -%>
+			</li>
+			<% end %>
+		<% end %>
+	<% else %>
+		<% @drinks.each do |drink| %>
+			<%= render 'drink', drink: drink %>
+		<% end %>
+	<% end %>
+</ul>
+
+
+			</div>
+			
+			<div class="col-4">
+				<% if params[:type]  == "group" %>
+					<%= simple_format @page_name.description, :class => 'small' %>
+				<% elsif params[:type]  == "draft" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% elsif params[:type]  == "bottle" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% elsif params[:type]  == "styles" %>
+					<%= simple_format @page_name.description, :class => 'small' %>
+				<% elsif params[:type]  == "latest" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% elsif params[:type]  == "soon" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% elsif params[:type]  == "special" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% elsif params[:type]  == "brewery" %>
+					<%= simple_format @page_name.description, :class => 'small' %>
+				<% elsif params[:type]  == "country" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% elsif params[:type]  == "state" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% elsif params[:type]  == "color" %>
+					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<% end %>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,695 @@
+/*
+	Global Var
+	Large Font: 125% / 20px
+	Small Font: 75% / 12px
+	Base Font: 16px;
+	Paddings: 8px / 12px / 20px
+	Opacity: 0.3 / 0.8
+
+	Colors:
+	Black		#000
+	White		#fff
+	Dark Red	#B11623
+	Grey		#333
+
+	Promotion Colors:
+	New			#FF003C
+	Back In		#00C176
+	Coming Soon #666666
+	Special		#FABE28
+
+	Buttons and Navs: Always Uppercase
+	Main Content: H1 H2
+	Side Content: H3
+*/
+
+
+/* -------------------------------------------------------- */
+/* Base Setters */
+a:hover, input[type=submit]:hover {
+	cursor: pointer;
+	opacity: 0.8;
+	text-decoration: underline;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+}
+
+body {
+	background: #fff;
+	color: #000;
+	font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-transform: uppercase;
+	margin-bottom: 8px;
+}
+
+h3, h4, h5, h6 {
+	border-bottom: 1px solid #B11623;
+}
+
+/* -------------------------------------------------------- */
+/* Generic Items */
+.divider:after {
+	content: "//";
+	opacity: 0.3;
+	padding: 0 8px;
+}
+
+.small {font-size: 75%;}
+.large {font-size: 125%;}
+.uppercase {text-transform: uppercase;}
+.nowrap {display: inline-block;}
+.nomargin {margin: 0;}
+.link-white {color: #fff;}
+.link-black {color: #000;}
+.text-left {float: left;}
+.text-right {float: right;}
+.img-left {float: left; margin-right: 12px; margin-bottom: 12px;}
+.img-right {float: right; margin-left: 12px; margin-bottom: 12px;}
+.admin-list {background: #eee; padding: 8px; padding-top: 0; box-sizing: border-box;}
+
+/* -------------------------------------------------------- */
+/* Alerts */
+
+.alert {padding: 8px;}
+.alert-notice {background: #e1f5c4;}
+.alert-alert {background: #feedff;}
+.alert-no-items {
+	color: rgba(0,0,0,0.1);
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	padding: 20px;
+	text-align: center;
+	text-transform: lowercase;
+}
+#error_explanation {
+	background: #e33258;
+	padding: 0 3px 3px 3px;
+	border-radius: 3px;
+	margin-bottom: 20px;
+}
+
+#error_explanation h2 {font-size: 16px; color: #fff; padding: 3px; margin: 0;}
+#error_explanation ul, #error_explanation p {display: block; margin: 0; background: #fff;}
+
+#error_explanation p {padding: 3px;}
+#error_explanation ul {padding: 5px 5px 5px 20px;}
+
+/* -------------------------------------------------------- */
+/* Forms */
+
+.page-form-label {
+	margin-bottom: 8px;
+}
+
+.page-form-field {
+	margin-bottom: 20px;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=number], textarea, select {
+	background: #fff;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	box-sizing: border-box;
+	display: block;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	outline: none;
+	padding: 8px;
+	width: 100%;
+	box-shadow: 0px 1px 3px #666;
+}
+
+select {
+	background-image: url(<%= asset_path("form-select-arrow.png") %>);
+	background-position: center right;
+	background-repeat: no-repeat;
+	margin: 0;
+	height: 42px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 8px;
+}
+
+.select2-selection {
+	box-shadow: 0px 1px 3px #666;
+}
+
+textarea {
+	height: 200px;
+	resize: vertical;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, textarea:focus, select:focus {
+	border-color: #B11623;
+	box-shadow: 0px 5px 10px #555;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+}
+
+.field_with_errors input[type=text], .field_with_errors input[type=password], .field_with_errors input[type=email], .field_with_errors input[type=number], .field_with_errors textarea, .field_with_errors select {
+	border-color: #e33258;
+	background: #feedff;
+	display: block;
+	width: 100%;
+}
+
+/* -------------------------------------------------------- */
+/* Lists */
+
+ul {font-weight: 200;}
+
+.list-nostyle {
+	list-style: none;
+	margin: 0 8px;
+	padding: 0;
+}
+
+.list-addsplitlines li {
+	border-bottom: 1px solid rgba(0,0,0,0.3);
+	padding-bottom: 8px;
+}
+
+.list-addsplitlines li:last-child {
+	border-bottom: none;
+}
+
+.list-nobullets {
+	list-style: none;
+	margin: 0 8px;
+	padding: 0;
+}
+
+.list-nobullets li {margin-bottom: 8px;}
+.list-nobullets.list-largepad li {margin-bottom: 20px;}
+
+.list-padlines li {
+	margin-bottom: 10px;
+}
+
+.list-superpadlines li {
+	margin-bottom: 20px;
+}
+
+.list-nosidemargin {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.list-stats span {
+	float: right;
+}
+
+.list-container-type {
+	display: block;
+	list-style: none;
+	margin: 0;
+	overflow: auto;
+	padding: 0;
+}
+
+.list-container-type li {
+	background: #eee;
+	box-sizing: border-box;
+	float: left;
+	font-weight: bold;
+	letter-spacing: 1px;
+	padding: 5px;
+	position: relative;
+	text-align: center;
+	text-transform: capitalize;
+	width: 25%;
+}
+
+.list-container-type li img {
+	width: 100%;
+}
+
+.list-images {
+	display: inline-block;
+	list-style: none;
+	margin: 0;
+	margin-right: -10px;
+	overflow: hidden;
+	padding: 0;
+}
+
+.list-images li {
+	box-sizing: border-box;
+	float: left;
+	padding-right: 10px;
+	width: 25%;
+}
+
+.list-images img {
+	display: block;
+	width: 100%;
+}
+
+.list-activity {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.list-activity p.small {
+	background: #eee;
+	border-top: 1px solid #bbb;
+	padding: 3px;
+}
+
+.list-letters a {
+	display: block;
+	float: left;
+	margin-bottom: 8px;
+	text-align: center;
+	width: 20%;
+}
+
+/* -------------------------------------------------------- */
+/* Header */
+
+
+header {
+	background: #fff;
+	overflow: auto;
+	text-align: right;
+}
+
+header #logo {
+	background: url(<%= asset_path("head_logo.png") %>) no-repeat;
+	background-size: 100% 100%;
+	display: block;
+	float: left;
+	height: 70px;
+	overflow: hidden;
+	text-indent: 100%;
+	width: 250px;
+	white-space: nowrap;
+}
+
+header #header-search {
+	background: url(<%= asset_path("head_search.png") %>) no-repeat;
+	display: block;
+	float: right;
+	height: 70px;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	width: 40px;
+}
+
+header nav#main .show-menu {
+	background: url(<%= asset_path("head_menu_show.png") %>) no-repeat;
+	display: none;
+	height: 70px;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	width: 40px;
+}
+
+header nav#main input[type=checkbox] {
+    display: none;
+    -webkit-appearance: none;
+}
+
+header nav#main input[type=checkbox]:checked ~ #header-menu{
+    display: block;
+}
+
+header nav#main ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+header nav#main ul li {
+	color: rgba(0,0,0,0.3);
+	display: inline-block;
+	line-height: 20px;
+	margin-top: 25px;
+	margin-right: 20px;
+}
+
+header nav#main a {
+	color: #000;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 20px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+header .header-menu-small a {
+	font-size: 12px !important;
+	line-height: 12px !important;
+}
+
+#header-name {
+	background: #000;/*#cdd;*/
+	color: #fff !important;
+	border-bottom: 1px solid #bcc;
+	margin-bottom: 12px;
+	padding: 10px 0;
+	text-transform: uppercase;
+/*	box-shadow: 0px -1px 3px rgba(0,0,0,0.3);*/
+}
+
+#header-name h1, #header-name h5 {
+	color: #fff;
+	line-height: 100%;
+	margin: 0;
+}
+
+#header-name h5 {
+	border: none;
+	font-weight: normal;
+}
+
+#header-name a {
+	color: #fff;
+}
+
+
+/* -------------------------------------------------------- */
+/* Footer */
+
+footer {
+	background: #333;
+	border-top: 1px solid rgba(0,0,0,0.8);
+	color: #bbb;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 20px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+footer a {
+	color: #fff !important;
+	text-decoration: none;
+}
+
+footer .divider:after {
+	color: #fff !important;
+}
+
+
+/* -------------------------------------------------------- */
+/* Hero Graphic */
+#hero-graphic {
+	display: block;
+	height: auto;
+	position: relative;
+/*	box-shadow: 0px 2px 3px #ddd;*/
+}
+
+#hero-graphic img {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+/* -------------------------------------------------------- */
+/* Beer Color Circles */
+
+.beer-color {
+	float: left;
+	border-radius: 20px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+.beer-color-level1 {color: #f3da73;}
+.beer-color-level2 {color: #d69333;}
+.beer-color-level3 {color: #9f430b;}
+.beer-color-level4 {color: #5f6063; margin-right: 8px;}
+
+.beer-color-form input[type=radio] {display: none;}
+.beer-color-form label {display: inline-block; float: left; width: 75px; line-height: 50px; border-radius: 3px; border: 2px solid rgba(0,0,0,0.3); font-size: 0px; text-align: center; box-sizing: border-box; margin-right: 10px;}
+.beer-color-form .beer-color-level1 {background-color: #f3da73;}
+.beer-color-form .beer-color-level2 {background-color: #d69333;}
+.beer-color-form .beer-color-level3 {background-color: #9f430b;}
+.beer-color-form .beer-color-level4 {background-color: #5f6063; margin-right: 0;}
+.beer-color-form i {color: #fff;}
+.beer-color-form input[type=radio]:checked + label {font-size: 20px;}
+
+
+/* -------------------------------------------------------- */
+/* Promotions */
+.promotions {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.promotions span {padding: 3px 11px; border-radius: 3px; background: #000; color: #fff; border: 1px solid rgba(0,0,0,.2); box-sizing: border-box; display: inline-block;}
+.promo-na {background: #000 !important;}
+.promo-new {background: #FF003C !important;}
+.promo-back {background: #00C176 !important;}
+.promo-soon {background: #666 !important;}
+.promo-special {background: #FABE28 !important;}
+
+.promo-container-type-special {
+	font-size: 10px;
+	position: absolute;
+	bottom: 11px;
+	left: 5px;
+	padding: 3px;
+	border-top-right-radius: 5px;
+	background: #FABE28;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+/* -------------------------------------------------------- */
+/* Activity Items */
+.activity-rating {
+	background: #666;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 8px;
+	color: #fff;
+	float: right;
+	font-size: 8px;
+	font-weight: bold;
+	margin-left: 12px;
+	margin-top: 12px;
+	padding: 8px;
+	text-align: center;
+	text-transform: uppercase;
+	width: 90px;
+}
+.activity-rating i {color: #fff; display: block; font-size: 40px;}
+.activity-rating-good {background: #00C176;}
+.activity-rating-bad {background: #FF003C;}
+
+
+/* -------------------------------------------------------- */
+/* Beer Pages */
+#beer-name {
+	background: #000;
+	padding: 10px 0;
+	text-transform: uppercase;
+}
+
+#beer-name h1, #beer-name h5 {
+	color: #fff;
+	line-height: 100%;
+	margin: 0;
+}
+
+#beer-name h5 {
+	border: none;
+	font-weight: normal;
+}
+
+.beer-style {font-weight: bold; text-transform: uppercase;}
+
+.beer-shortdesc {font-style: italic;}
+
+/* -------------------------------------------------------- */
+/* Game Pages */
+
+a.merch-image-grid {
+	display: block;
+	text-align: right;
+}
+
+img.merch-image-grid {
+	width: 100%;
+}
+
+/* -------------------------------------------------------- */
+/* Merch Pages */
+
+/* -------------------------------------------------------- */
+/* Event Pages */
+
+
+/* -------------------------------------------------------- */
+/* Buttons */
+.btn-bar {text-align: right;}
+.btn, input[type=submit] {
+	background: #B11623;
+	border: none;
+	border-left: 2px solid rgba(0,0,0,.3);
+	color: #fff;
+	display: inline-block;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-left: 10px;
+	padding: 2px 8px;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+}
+.btn i, .btn span {color: #fff;}
+.btn-cancel {
+	background: #bbb !important;
+}
+.btn:hover {opacity: .8;}
+.btn-bar-interact .btn {font-size: 120%;}
+
+.btn-sidebar {
+	text-align: left;
+}
+.btn-sidebar .btn {
+	border-left-width: 0px;
+	display: block;
+	margin: 0;
+	margin-bottom: 12px;
+	padding: 12px 8px 12px 8px;
+	text-align: center;
+}
+.fbtn-sidebar .btn:hover {
+	border-left-width: 8px;
+	padding: 12px 8px 12px 0px;
+}
+
+.btn, input[type=submit] {
+color: #000;
+background: #dcc;
+border-left: 5px solid #B11623;
+}
+.btn i, .btn span {color: #000;}
+.btn-sidebar .btn {
+	border-left: 5px solid #B11623;
+}
+
+
+/* -------------------------------------------------------- */
+/* Admin Items */
+#admin-version {background: #eee;}
+
+.admin-button {
+	background: #b33;
+	box-sizing: border-box;
+	color: #fff !important;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	height: 200px;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.admin-button.done {
+	background: #3b3;
+}
+
+
+.admin-button i {
+	display: block;
+	color: #fff;
+	font-size: 130px;
+}
+
+.admin-button:hover {
+	text-decoration: none;
+}
+
+#admin-version .hidden {
+	background: #ccc;
+	border: 1px solid #333;
+	border-right: 8px solid #333;
+	box-sizing: border-box;
+	padding: 8px;
+	position: relative;
+}
+
+#admin-version .hidden:after {
+	content: "Hidden";
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	font-size: 9px;
+	font-weight: bold;
+	padding: 3px 0px 3px 6px;
+	background: #333;
+	color: #fff;
+	letter-spacing: 1px;
+	border-bottom-left-radius: 8px;
+}
+
+
+
+/* -------------------------------------------------------- */
+/* Mobile */
+@media screen and (max-width : 960px) {
+	/* -------------------------------------------------------- */
+	/* Base Setters */
+	body {padding-top: 70px !important;}
+	.hide {display: none !important;}
+	
+	
+	/* -------------------------------------------------------- */
+	/* Header */
+	header {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 100;
+	}
+	
+	header nav#main .show-menu {
+		display: block;
+		float: right;
+	}
+	
+	header nav#main ul {
+		clear: both;
+		display: none;
+		position: static;
+	}
+	
+	header nav#main ul li {
+		display: block;
+		margin: 0;
+		margin-top: 2px;
+		text-align: center;
+	}
+
+	header nav#main ul li a {display: block;}
+	header nav#main a, header .header-menu-small a {line-height: 20px !important; font-size: 16px !important;}
+	header nav#main li a {padding: 12px 0; background-color: #eee;}
+	header nav#main ul li {border-bottom: 1px solid #bbb; margin: 0;}
+
+	/* -------------------------------------------------------- */
+	/* Footer */
+	footer {font-size: 16px;}
+	footer .divider:after {display: none;}
+	footer a {display: block;}
+	
+	.beer-shortdesc {margin-left: 12px; margin-right: 12px;}
+	.beer-shortdesc h2 {font-size: 20px;}
+}
+
+#snipcart-header h2,
+.snip-ico--close {color: #fff !important;}
+.edit-note, #your-notes {display: none;}

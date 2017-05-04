@@ -1,0 +1,42 @@
+<% @title = "Dashboard // Playlists" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Screen Dashboard', dashboard_admin_screens_path %></h5>
+				<h1>Playlists</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-8">
+			<ul class="list-nostyle list-nosidemargin list-padlines list-addsplitlines">
+				<% if @playlists.empty? %>
+					<li><span class="alert-no-items">--- no items to show ---</span></li>
+				<% else %>
+					<% @playlists.each do |playlist| %>
+						<%= render 'line_item', playlist: playlist %>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to 'Create a New Playlist', new_dashboard_playlist_path, :class => 'btn' %>
+			</div>
+			
+			<h4>View Options</h4>
+			<ul class="list-nostyle list-padlines">
+				<li><%= link_to "View All Playlists", dashboard_playlists_path %></li>
+				<li><%= link_to "View Hybrid Screens Only", dashboard_playlists_path(type: 'h') %></li>
+			</ul>
+		</div>
+		
+	</div>
+</div>

@@ -1,0 +1,2 @@
+module Dashboard::GamesHelper
+end

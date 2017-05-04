@@ -1,0 +1,3 @@
+module Dashboard::DrinksHelper
+
+end

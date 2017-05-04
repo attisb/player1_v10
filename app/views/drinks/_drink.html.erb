@@ -1,0 +1,29 @@
+<% if params[:type] == "draft" || params[:type] == "bottle" || params[:type] == "special" || params[:type] == "latest" -%>
+<% line_drink = drink.drink -%>
+<% else -%>
+<% line_drink = drink -%>
+<% end -%>
+
+<% if line_drink.visible? || line_drink.coming_soon? %>
+<% if signed_in? && @user_drinks.any? {|h| h.drink_id == line_drink.id } %>
+<li class="drink-had">
+<% else %>
+<li>
+<% end %>
+	
+	<strong class="large">
+		<span class="nowrap text-right">
+			<% (1..4).each do |i| %>
+				<% if line_drink.color == i %>
+					<i class="fa fa-check-circle beer-color-level<%= i-%>" aria-hidden="true"></i>
+				<% else %>
+					<i class="fa fa-circle beer-color-level<%= i-%>" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+	    </span>
+		<%= link_to "#{line_drink.brewery.display_name} #{line_drink.name.titleize}", drinks_by_name_path(line_drink) %>
+	</strong>
+	<p class="nomargin"><%= line_drink.short_description -%></p>
+	
+</li>
+<% end %>

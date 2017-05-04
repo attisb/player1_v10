@@ -1,0 +1,5 @@
+<li>
+	<%= link_to drinks_by_name_path(drink) do %><strong><%= drink.name.titleize -%></strong><% end %><br/>
+	<span class="small"><%= drink.brewery.name -%></span>
+	<%= simple_format( truncate(drink.description, :length => 80), :class => 'nomargin' )%>
+</li>

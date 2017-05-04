@@ -1,0 +1,41 @@
+<% @title = "Dashboard // Asset // #{@asset.name}" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Screen Dashboard', dashboard_admin_screens_path %></h5>
+				<h1>Asset // <%= @asset.name -%></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			<% if @asset.asset_type == "w" %>
+				<%= simple_format @asset.content %>
+			<% elsif @asset.asset_type == "i" %>
+				<%= image_tag @asset.ad_asset_file, :style => 'width: 100%;' %>
+			<% else %>
+				<video width="100%" controls>
+				<source preload="none" src="<%= @asset.ad_asset_file -%>" type="video/mp4">
+				Your browser does not support HTML5 video.
+				</video>
+			<% end %>
+		</div>
+			
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit Asset'), edit_dashboard_asset_path(@asset), :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Asset'), dashboard_asset_path(@asset), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-file-o" aria-hidden="true"></i> Create Asset'), new_dashboard_asset_path, :class => 'btn btn-cancel' %>
+				<%= link_to 'Back to Asset List', dashboard_assets_path, :class => 'btn btn-cancel' %>
+			</div>
+		</div>
+	</div>
+</div>
+
+

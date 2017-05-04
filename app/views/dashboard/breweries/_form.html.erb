@@ -1,0 +1,71 @@
+<div class="page-form">
+	<%= form_for [:dashboard, @brewery] do |f| %>
+	<% if @brewery.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@brewery.errors.count, "error") %> prohibited this brewery from being saved:</h2>
+			<ul>
+				<% @brewery.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="page-form-label"><%= f.label :name %></div>
+	<div class="page-form-field"><%= f.text_field :name %></div>
+
+	<div class="page-form-label"><%= f.label :display_name %></div>
+	<div class="page-form-field"><%= f.text_field :display_name %></div>
+
+	<div class="page-form-label"><%= f.label :description %></div>
+	<div class="page-form-field"><%= f.text_area :description %></div>
+	
+
+
+	<div class="page-form-label"><%= f.label :country_id %></div>
+	<div class="page-form-field"><%= f.select :country_id, options_for_select(@countries.collect { |country| [country.name.titleize, country.id] }, @brewery.country_id), {include_blank: true}, { id: 'select-country' } %></div>
+
+	<div class="page-form-label"><%= f.label :state_id %></div>
+	<div class="page-form-field"><select id="select-state" name="brewery[state_id]"><option value="" selected="">Select Your City</option></select></div>
+
+	
+
+	<div class="page-form-label"><%= f.label :established %></div>
+	<div class="page-form-field"><%= f.number_field :established %></div>
+
+	<div class="page-form-label"><%= f.label :facebook %></div>
+	<div class="page-form-field"><%= f.text_field :facebook %></div>
+
+	<div class="page-form-label"><%= f.label :twitter %></div>
+	<div class="page-form-field"><%= f.text_field :twitter %></div>
+
+	<div class="page-form-label"><%= f.label :instagram %></div>
+	<div class="page-form-field"><%= f.text_field :instagram %></div>
+
+	<div class="page-form-label"><%= f.label :website %></div>
+	<div class="page-form-field"><%= f.text_field :website %></div>
+
+
+	<div class="btn-bar">
+		<%= link_to 'Cancel', dashboard_breweries_path, :class => 'btn btn-cancel'%>
+		<%= f.submit 'Save Brewery' %>
+	</div>
+<% end %>
+</div>
+
+<script type="text/javascript">
+	var current_state = <%= @brewery.state_id.to_i -%> || 999999;
+	
+	$(function() {
+		$('#select-country, #select-state').select2();
+
+		if (current_state < 999999) {
+			loadStateList();
+		}	
+
+		$('#select-country').change(function () {
+			loadStateList();
+		});
+	});
+</script>
+

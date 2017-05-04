@@ -1,0 +1,12 @@
+<li class="large">
+	<a href="#"><strong><%= link_to screen.name, [:dashboard, screen] -%></strong></a>
+	<p class="nomargin small">
+		<strong>Location: </strong><%= screen.location %>
+		<span class="divider"></span>
+		<strong>Enabled: </strong><%= screen.enabled.to_s.titleize %>
+	</p>
+	<div class="btn-bar">
+		<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit'), edit_dashboard_screen_path(screen), :class => 'btn' %>
+		<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete'), dashboard_screen_path(screen), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+	</div>
+</li>

@@ -1,0 +1,17 @@
+<% @title = "Merch // #{@product.name}" %>
+
+<h1>Store#show</h1>
+<p>Find me in app/views/store/show.html.erb</p>
+
+<button
+    class="snipcart-add-item"
+    data-item-id="<%= @product.id -%>"
+    data-item-name="<%= @product.name -%>"
+    data-item-price="<%= @product.price -%>"
+    data-item-weight="20"
+    data-item-url="<%= product_url(@product) -%>"
+	data-item-custom1-name="Size"
+	data-item-custom1-options="Small|Medium|Large"
+    data-item-description="<%= @product.description -%>">
+        Buy Item
+</button>

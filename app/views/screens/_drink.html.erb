@@ -1,0 +1,23 @@
+					<div class="drink">
+						<div class="drink-left">
+							<h2><span class="beer-color beer-color-level<%= d.drink.color -%>"><%= d.drink.color -%></span> <%= d.drink.brewery.display_name -%> <%= d.drink.name -%></h2>
+							<h3><%= d.drink.beer_style.name -%> <span style="opacity: .5; margin: 0 10px;">//</span> <%= number_to_percentage d.drink.abv, :precision => 1 -%> ABV</h3>
+						</div>
+						<div class="drink-right">
+							<% d.drink.prices.each do |price| %>
+								<% if price.available? %>
+									<div class="drink-size">
+										<h2><%= number_to_currency price.amount -%></h2>
+										<h4><%= price.beer_size.name-%></h4>
+									</div>
+								<% end %>
+							<% end %>
+						</div>
+						<div class="promotions">
+							<%= raw('<span class="promo-na">not available</span>') unless d.drink.visible? %>
+							<%= raw('<span class="promo-soon">coming soon</span>') if d.drink.coming_soon? %>
+							<%= raw('<span class="promo-new">new</span>') if d.drink.prices.where(is_new: true).count > 0 %>
+							<%= raw('<span class="promo-back">Returning</span>') if d.drink.prices.where(is_returning: true).count > 0 %>
+							<%= raw('<span class="promo-special">special</span>') if d.drink.prices.where(is_special: true).count > 0 %>
+						</div>
+					</div>

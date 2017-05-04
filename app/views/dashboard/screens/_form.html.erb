@@ -1,0 +1,46 @@
+<div class="page-form">
+	<%= form_for [:dashboard, @screen] do |f| %>
+	<% if @screen.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@screen.errors.count, "error") %> prohibited this screen from being saved:</h2>
+			<ul>
+				<% @screen.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="page-form-label"><%= f.label :name %></div>
+	<div class="page-form-field"><%= f.text_field :name %></div>
+
+	<div class="page-form-label"><%= f.label :direction %></div>
+	<div class="page-form-field">
+		<%= f.select :direction, [['Vertical', 'v'], ['Horizontal', 'h']] %>
+	</div>
+
+	<div class="page-form-label"><%= f.label :location %></div>
+	<div class="page-form-field"><%= f.text_field :location %></div>
+
+	<div class="page-form-label"><%= f.label :screen_type %></div>
+		<%= f.select :screen_type, [['Ad Screen','a'],['Menu Screen','m'],['Kiosk','k'],['Hybrid','h']] %>
+
+	<div class="page-form-label"><%= f.label :codeword %></div>
+	<div class="page-form-field"><%= f.text_field :codeword %></div>
+
+	<div class="page-form-label">
+		<%= f.check_box :enabled %>
+		<%= f.label :enabled %>
+	</div>
+
+	<div class="page-form-label">
+		<%= f.check_box :show_menu %>
+		<%= f.label :show_menu %>
+	</div>
+
+	<div class="btn-bar">
+		<%= link_to 'Cancel', dashboard_screens_path, :class => 'btn btn-cancel'%>
+		<%= f.submit 'Save Screen' %>
+	</div>
+<% end %>
+</div>

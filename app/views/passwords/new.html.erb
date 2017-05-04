@@ -1,0 +1,35 @@
+<% @title = "Forgot Your Password" %>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h5>We've all done it</h5>
+					<h1>Forgot Your Password</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-5">
+
+<div class="page-form">
+<%= form_for :password, url: passwords_path do |form| %>
+	<div class="page-form-label"><%= form.label :email %></div>
+	<div class="page-form-field"><%= form.text_field :email, type: 'email' %></div>
+
+	<div class="btn-bar">
+	<%= form.submit %>
+	</div>
+<% end %>
+</div>
+
+			</div>
+			<div class="col-7">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+	</div>

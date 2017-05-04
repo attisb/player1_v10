@@ -1,0 +1,46 @@
+<div class="page-form">
+	<%= form_for [:dashboard, @game] do |f| %>
+	<% if @game.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+			<ul>
+				<% @game.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="page-form-label"><%= f.label :name %></div>
+	<div class="page-form-field"><%= f.text_field :name %></div>
+
+	<div class="page-form-label"><%= f.label :description %></div>
+	<div class="page-form-field"><%= f.text_area :description %></div>
+
+	<div class="page-form-label"><%= f.label :hero_image %></div>
+	<div class="page-form-field"><%= f.file_field :hero_image %></div>
+	
+	<div class="page-form-label"><%= f.label :cover_image %></div>
+	<div class="page-form-field"><%= f.file_field :cover_image %></div>
+
+	<div class="page-form-label"><%= f.label :players %></div>
+	<div class="page-form-field"><%= f.number_field :players %></div>
+
+	<div class="page-form-label"><%= f.label :release_date %></div>
+	<div class="page-form-field"><%= f.date_field :release_date %></div>
+
+	<div class="page-form-field">
+  <%= f.collection_check_boxes :game_console_ids, GameConsole.all, :id, :name do |m| %>
+    <%= m.check_box %> <%= m.label %><br/>
+  <% end %>
+	</div>
+
+	<div class="page-form-label"><%= f.label :category_id %></div>
+	<div class="page-form-field"><%= f.select :category_id, Category.where(bucket_type: 'games').order(name: :asc).collect {|p| [ p.name, p.id ] }, {include_blank: 'None'} %></div>
+
+	<div class="btn-bar">
+		<%= link_to 'Cancel', dashboard_games_path, :class => 'btn btn-cancel'%>
+		<%= f.submit 'Save Game' %>
+	</div>
+<% end %>
+</div>

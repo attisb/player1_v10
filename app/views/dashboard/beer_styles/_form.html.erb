@@ -1,0 +1,31 @@
+<div class="page-form">
+	<%= form_for [:dashboard, @beer_style] do |f| %>
+	<% if @beer_style.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@beer_style.errors.count, "error") %> prohibited this beer_style from being saved:</h2>
+			<ul>
+				<% @beer_style.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="page-form-label"><%= f.label :name %></div>
+	<div class="page-form-field"><%= f.text_field :name %></div>
+
+	<div class="page-form-label"><%= f.label :description %></div>
+	<div class="page-form-field"><%= f.text_area :description %></div>
+
+	<div class="page-form-label"><%= f.label :abv_range_start, 'ABV Range Low' %></div>
+	<div class="page-form-field"><%= f.number_field :abv_range_start, :step => 0.1 %></div>
+
+	<div class="page-form-label"><%= f.label :abv_range_end, 'ABV Range Hight' %></div>
+	<div class="page-form-field"><%= f.number_field :abv_range_end, :step => 0.1 %></div>
+
+	<div class="btn-bar">
+		<%= link_to 'Cancel', dashboard_beer_styles_path, :class => 'btn btn-cancel'%>
+		<%= f.submit 'Save Drink Style' %>
+	</div>
+<% end %>
+</div>

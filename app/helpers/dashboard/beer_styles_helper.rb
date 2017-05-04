@@ -1,0 +1,2 @@
+module Dashboard::BeerStylesHelper
+end

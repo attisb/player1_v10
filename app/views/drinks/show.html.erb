@@ -1,0 +1,135 @@
+<% @title = @drink.name.titleize %>
+
+	<!-- Hero Graphic -->
+	<div id="hero-graphic">
+		<%= image_tag @drink.image.url %>
+	</div>
+
+	<div id="header-name">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<%= link_to 'Back to Drinks', drinks_path, :class => 'back-btn' %>
+					<h1><%= @drink.name %></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<p class="beer-style">
+					<%= link_to @drink.beer_style.name, drinks_by_style_path(@drink.beer_style) %>
+					<span class="divider"></span>
+					<span class="nowrap">
+						<% (1..4).each do |i| %>
+							<% if @drink.color == i %>
+								<i class="fa fa-check-circle beer-color-level<%= i-%>" aria-hidden="true"></i>
+							<% else %>
+								<i class="fa fa-circle beer-color-level<%= i-%>" aria-hidden="true"></i>
+							<% end %>
+						<% end %>
+				    </span>
+					<span class="divider"></span>
+					<%= number_to_percentage @drink.abv, :precision => 1 %> ABV
+				</p>
+
+				<blockquote class="beer-shortdesc">
+					<h2><%= @drink.short_description -%></h2>
+				</blockquote>
+
+				<div class="promotions">
+					<%= raw('<span class="promo-na">not available</span>') unless @drink.visible? %>
+					<%= raw('<span class="promo-soon">coming soon</span>') if @drink.coming_soon? %>
+					<%= raw('<span class="promo-new">new</span>') if @drink.prices.where(is_new: true).count > 0 %>
+					<%= raw('<span class="promo-back">Returning</span>') if @drink.prices.where(is_returning: true).count > 0 %>
+					<%= raw('<span class="promo-special">special</span>') if @drink.prices.where(is_special: true).count > 0 %>
+				</div>
+				
+				<%= simple_format @drink.description %>
+				
+				<div class="btn-bar btn-bar-interact">
+					<% if current_user %>
+						<%= link_to track_had_path(@drink.id), :class => 'btn' do %><i class="fa fa-check" aria-hidden="true"></i> Had Today<% end %>
+
+						<% if current_user.user_wants.where(drink_id: @drink.id).count == 0 %>
+							<%= link_to track_want_path(@drink.id), :class => 'btn' do %><i class="fa fa-plus" aria-hidden="true"></i> Add to List<% end %>
+						<% else %>
+							<%= link_to not_track_want_path(@drink.id), :class => 'btn' do %><i class="fa fa-plus" aria-hidden="true"></i> Don't Try<% end %>
+						<% end %>
+					<% else %>
+						<%= link_to "Sign up to track your drinks", sign_up_path, :class => 'btn' %>
+					<% end %>
+				</div>
+
+			</div>
+		</div>
+		
+		
+		<div class="row">
+			<div class="col-1">
+				<!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox"></div>
+			</div>
+
+			<div class="col-7">
+				<h3>Available In</h3>
+				<ul class="list-container-type">
+					<% @drink.prices.each do |price| %>
+						<% if price.available? %>
+						<li>
+							<%= image_tag price.beer_size.image, :alt => price.beer_size.name %>
+							<% if price.is_special? %>
+								<span class="promo-container-type-special">Special</span>
+							<% end %>
+						</li>
+						<% end %>
+					<% end %>
+				</ul>
+				
+				<h3>Drink Notes</h3>
+				<script>
+				var idcomments_acct = '955d9dc53e8799a1d245b5c61a7b9c00';
+				var idcomments_post_id;
+				var idcomments_post_url;
+				</script>
+				<span id="IDCommentsPostTitle" style="display:none"></span>
+				<script type='text/javascript' src='https://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>					
+			</div>
+
+			<div class="col-4">
+				<% if signed_in? && (current_user.admin? || current_user.moderator?) %>
+					<div class="btn-bar btn-sidebar">
+						<%= link_to 'Edit Drink', edit_dashboard_drink_path(@drink), :class => 'btn' %>
+					</div>
+				<% end %>
+				
+				<h4>Similar Beers</h4>
+				<ul class="list-nostyle list-padlines">
+					<% @similar.each do |drink| %>
+					<li>
+						<%= link_to drink.name, drinks_by_name_path(drink.id) %><br/>
+						<span class="small"><%= drink.beer_style.name -%></span>
+					</li>
+					<% end %>
+				</ul>
+				<div class="btn-bar">
+					<%= link_to 'See More', drinks_by_style_path(@drink.beer_style), :class => "btn" -%>
+				</div>
+
+				<h4>Other beers by Goose Island</h4>
+				<ul class="list-nostyle list-padlines">
+					<% @brewery.each do |drink| %>
+					<li>
+						<%= link_to drink.name, drinks_by_name_path(drink.id) %><br/>
+						<span class="small"><%= drink.beer_style.name -%></span>
+					</li>
+					<% end %>
+				</ul>
+				<div class="btn-bar">
+					<%= link_to 'See More', drinks_by_brewery_path(@drink.brewery), :class => "btn" -%>
+				</div>
+
+			</div>
+		</div>
+	</div>

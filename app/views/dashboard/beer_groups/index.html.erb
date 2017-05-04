@@ -1,0 +1,43 @@
+<% @title = "Dashboard // Drink Groups" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Drink Dashboard', dashboard_admin_drinks_path %></h5>
+				<h1>Drink Groups</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-8">
+			<ul class="list-nostyle list-nosidemargin list-padlines list-addsplitlines">
+				<% if @beer_groups.empty? %>
+					<li><span class="alert-no-items">--- no items to show ---</span></li>
+				<% else %>
+					<% @beer_groups.each do |beer_group| %>
+						<%= render 'line_item', beer_group: beer_group %>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to 'Create a New Drink Group', new_dashboard_beer_group_path, :class => 'btn' %>
+			</div>
+			
+			<h4>View Options</h4>
+			<ul class="list-nostyle list-padlines">
+				<li><%= link_to "View All Groups", dashboard_beer_groups_path %></li>
+				<li><%= link_to "View Visible Only", dashboard_beer_groups_path(visible: true) %></li>
+				<li><%= link_to "View Non Visible Only", dashboard_beer_groups_path(visible: false) %></li>
+			</ul>
+		</div>
+		
+	</div>
+</div>

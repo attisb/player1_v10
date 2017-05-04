@@ -1,0 +1,12 @@
+<div class="page-form">
+	<p class="small"><strong>Notice:</strong> Notes are only visible to you and not publicly visible unless you check the box. Once you make a note public you will not be able to edit it further. Notes do not become visible to everyone until approved.</p>
+	<%= form_for @note do |c| %>
+	<%= c.hidden_field :drink_id %>
+	<div class="page-form-field"><%= c.text_area :message %></div>
+	<div class="page-form-field"><%= c.check_box :make_public %> <%= c.label :make_public, "Make This Note Public" %></div>
+
+	<div class="btn-bar">
+		<%= c.submit 'Save Note' %>
+	</div>
+<% end %>
+</div>

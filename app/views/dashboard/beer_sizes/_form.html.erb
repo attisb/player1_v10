@@ -1,0 +1,29 @@
+<div class="page-form">
+	<%= form_for [:dashboard, @beer_size] do |f| %>
+	<% if @beer_size.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@beer_size.errors.count, "error") %> prohibited this beer_size from being saved:</h2>
+			<ul>
+				<% @beer_size.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="page-form-label"><%= f.label :name %></div>
+	<div class="page-form-field"><%= f.text_field :name %></div>
+
+	<div class="page-form-label"><%= f.label :image %></div>
+	<div class="page-form-field"><%= f.file_field :image %></div>
+
+	<div class="page-form-label"><%= f.check_box :is_draft %> <%= f.label :is_draft, 'Is this a draft pour?' %></div>
+
+	<div class="page-form-label"><%= f.check_box :use_tap_lis %> <%= f.label :use_tap_lis, 'Should this be listed on the draft menus?' %></div>
+
+	<div class="btn-bar">
+		<%= link_to 'Cancel', dashboard_beer_sizes_path, :class => 'btn btn-cancel'%>
+		<%= f.submit 'Save Drink Size' %>
+	</div>
+<% end %>
+</div>

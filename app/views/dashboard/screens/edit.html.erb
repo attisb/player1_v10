@@ -1,0 +1,28 @@
+<% @title = "Dashboard // Edit Screen" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+				<h1>Edit Screen</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			
+<%= render 'form' %>
+
+		</div>
+		
+		<div class="col-4">
+<%= render 'help' %>
+		</div>
+	</div>
+</div>
+

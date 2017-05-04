@@ -1,0 +1,29 @@
+<div class="page-form">
+	<%= form_tag(dashboard_search_path, :method => "post", id: "search-form") do %>
+		<% unless the_type == "choice" %>
+			<%= hidden_field_tag :type, the_type %>
+		<% end%>
+	    <div class="page-form-field"><%= text_field_tag :k, nil, placeholder: "Search" %></div>
+	    <div class="btn-bar">
+			<% if the_type == "choice" %>
+				<%= radio_button_tag :type, 'drinks', 'checked' %>
+				<%= label_tag 'type_drinks', "Drinks" %>
+
+				<%= radio_button_tag :type, 'breweries' %>
+				<%= label_tag 'type_breweries', "Breweries" %>
+
+				<%= radio_button_tag :type, 'games' %>
+				<%= label_tag 'type_games', "Games" %>
+				
+				<% if current_user.admin? %>
+					<%= radio_button_tag :type, 'users' %>
+					<%= label_tag 'type_users', "Users" %>
+				<% end %>
+
+				<%= radio_button_tag :type, 'all' %>
+				<%= label_tag 'type_all', "Everything" %>
+			<% end %>
+			<%= submit_tag "Search", :name => nil %>
+		</div>
+	<% end %>
+</div>

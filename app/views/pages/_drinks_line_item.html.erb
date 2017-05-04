@@ -1,0 +1,10 @@
+<% if @countries || @states || @breweries || @beer_styles %>
+	<li class="large">
+		<strong><%= link_to beer.name, link -%></strong>
+	</li>
+<% else %>
+	<li class="large">
+		<strong><%= link_to beer.name, link -%></strong>
+		<p class="small"><%= beer.description -%></p>
+	</li>
+<% end %>

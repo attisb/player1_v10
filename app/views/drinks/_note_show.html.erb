@@ -1,0 +1,38 @@
+
+
+<!--
+<div class="page-form show-note" id="show-form-note-<%= n.id -%>">
+	<%= simple_format n.message %>
+	
+	<% if signed_in? %>
+		<% if n.make_public? %>
+			<p class="small">Created: <%= n.created_at %> <i class="text-right">Marked Public. No further changes can be made.</i></p>
+		<% else %>
+		<p class="small">Created: <%= n.created_at %></p>
+		<div class="btn-bar">
+			<a href="#" class="btn btn-toggle" data-id="<%= n.id -%>">Edit this Note</a>
+		</div>
+		<% end %>
+	<% else %>
+	<% end %>
+	
+</div>
+
+<% unless n.make_public? %>
+<div class="page-form edit-note" id="edit-form-note-<%= n.id -%>">
+	<%= form_for(n, url: note_path(n), :method => :patch) do |no| %>
+	<div class="page-form-field"><%= no.text_area :message %></div>
+	<div class="page-form-field"><%= no.check_box :make_public %> <%= no.label "Make This Note Public" %></div>
+	<p class="small"><strong>Notice:</strong> Notes are only visible to you and not publicly visible. Once you make a note public you will not be able to edit it further. Notes do not become visible to everyone until approved.</p>
+
+	<div class="btn-bar">
+		<a href="#" class="btn-toggle" data-id="<%= n.id -%>">Cancel</a>
+		<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Note'), note_path(n), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-cancel' %>
+		<%= no.submit 'Update Note' %>
+	</div>
+<% end %>
+</div>
+<% end %>
+
+
+-->

@@ -1,0 +1,32 @@
+<% @title = "Dashboard // Category // #{@category.name}" %>
+
+<div id="header-name">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h5><%= link_to 'Back to Dashboard', dashboard_home_path %></h5>
+				<h1>Category // <%= @category.name -%></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			<%= simple_format @category.description %>
+		</div>
+			
+		<div class="col-4">
+			<div class="btn-bar btn-sidebar">
+				<%= link_to raw('<i class="fa fa-pencil" aria-hidden="true"></i> Edit Category'), edit_dashboard_category_path(@category), :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-trash" aria-hidden="true"></i> Delete Category'), dashboard_category_path(@category), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+				<%= link_to raw('<i class="fa fa-file-o" aria-hidden="true"></i> Create Category'), new_dashboard_category_path, :class => 'btn btn-cancel' %>
+				<%= link_to 'Back to Category List', dashboard_categories_path, :class => 'btn btn-cancel' %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
