@@ -8,13 +8,14 @@ require 'mina/rvm'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :application_name, 'plaeyr1_v10'
-set :domain, '198.199.123.28'
+set :application_name, 'player1_v10'
+set :domain, '162.243.54.232'
 set :user, fetch(:application_name)
 set :deploy_to, "/home/#{fetch(:user)}/app"
-set :repository, 'git@github.org:attisb/plaeyr1_v10.git'
+set :repository, 'git@github.com:attisb/player1_v10.git'
 set :branch, 'master'
 set :rvm_use_path, '/etc/profile.d/rvm.sh'
+
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
